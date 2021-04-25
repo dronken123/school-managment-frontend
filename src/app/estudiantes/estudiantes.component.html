@@ -1,5 +1,5 @@
 <h1>Lista de estudiantes</h1>
-<button class="btn btn-primary"  [routerLink]="[ '/estudiantes/form']">Crear estudiante</button>
+<button class="btn btn-outline-success"  [routerLink]="[ '/estudiantes/form']">Crear estudiante</button>
 <hr>
 <table class="table table-hover">
     <thead>
@@ -22,8 +22,8 @@
             <td>{{estudiante.dni}}</td>
             <td>{{estudiante.fechaNacimiento}}</td>
             <td>
-                <button class="btn btn-info me-2"  [routerLink]="[ '/estudiantes/form', estudiante.id ]">Actualizar</button>
-                <button class="btn btn-danger" (click)="eliminar(estudiante)">Eliminar</button>
+                <button class="btn btn-outline-secondary me-2"  [routerLink]="[ '/estudiantes/form', estudiante.id ]">Actualizar</button>
+                <button class="btn btn-outline-danger" (click)="eliminar(estudiante)">Eliminar</button>
             </td>
         </tr>
     </tbody>

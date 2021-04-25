@@ -12,6 +12,8 @@ export class FormComponent implements OnInit {
 
   estudiante: Estudiante = new Estudiante();
 
+  errores: string[] = [];
+
   constructor(private estudianteService: EstudianteService,
               private router: Router,
               private activatedRoute: ActivatedRoute) { }
@@ -36,7 +38,12 @@ export class FormComponent implements OnInit {
     this.estudianteService.saveEstudiante(this.estudiante)
         .subscribe(response => {
           this.router.navigate(['/']);
-        });
+        },
+        err => {
+          this.errores = err.error.errors as string[];
+          console.log(this.errores)
+        }
+        );
   }
 
   actualizar(){
