@@ -44,7 +44,19 @@ export class EstudianteService {
   }
 
   updateEstudiante(estudiante: Estudiante): Observable<Estudiante>{
-    return this.http.put<Estudiante>(`${this.urlEndPoint}/${estudiante.id}`, estudiante);
+    return this.http.put<Estudiante>(`${this.urlEndPoint}/${estudiante.id}`, estudiante)
+               .pipe(
+                catchError(e => {
+                  if(e.status == 400){
+                   return throwError(e);
+                  }
+
+                  console.log(e.error.mensaje)
+                  console.error(e.error.errors)
+
+                  return throwError(e);
+                })
+              );
   }
 
   deleteEstudiante(id: number): Observable<Estudiante>{

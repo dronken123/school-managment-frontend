@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Curso } from 'src/app/models/curso';
 import { Estudiante } from 'src/app/models/estudiante';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 
@@ -50,7 +51,12 @@ export class FormComponent implements OnInit {
     this.estudianteService.updateEstudiante(this.estudiante)
         .subscribe(response => {
           this.router.navigate(['/']);
-        })
+        },
+        err => {
+          this.errores = err.error.errors as string[];
+          console.log(this.errores)
+        }
+        );
   }
 
 

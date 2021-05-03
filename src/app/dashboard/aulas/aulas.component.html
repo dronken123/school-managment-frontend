@@ -1,0 +1,30 @@
+<h1>Actualización de secciones</h1>
+<hr>
+
+<div class="col-md-12 row">
+<div class="col-md-6">
+    <h4>Lista de secciones</h4>
+    <hr>
+    <div *ngFor="let aula of aulas" class="card mb-3" style="width: 20rem;">
+        <div class="card-header bg-success text-white">
+            Sección {{aula.seccion}}
+        </div>
+        <ul class="list-group list-group-flush">
+          <div class="row p-3">
+              <div class="col-md-8">Estudiantes: {{aula.listaEstudiantes.length}}</div>
+              <div class="col-md-4"><button class="btn btn-light btn-sm">Agregar</button></div>
+          </div>
+        </ul>
+      </div>
+</div>
+<div class="col-md-6 ">
+    <h4>Estudiantes sin asignar</h4>
+    <hr>
+    <div class="card">
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let estudiante of estudiantes" class="list-group-item">{{estudiante.nombres}} {{estudiante.apellidoPaterno}} {{estudiante.apellidoMaterno}}</li>
+        </ul>
+      </div>
+</div>
+
+</div>
