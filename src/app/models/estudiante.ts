@@ -9,5 +9,5 @@ export class Estudiante {
     dni: string;
     sexo: string;
     correo: string;
-    aula: Aula;
+    aulaEstudiante: Aula;
 }

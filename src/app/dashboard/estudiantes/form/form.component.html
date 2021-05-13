@@ -54,7 +54,7 @@
                 <div class="form-group row">
                     <label for="aula" class="col-form-label col-sm-2">Aula</label>
                     <div class="col-sm-8">
-                        <select [(ngModel)]="estudiante.aula" class="form-control" name="aula">
+                        <select [(ngModel)]="estudiante.aulaEstudiante" class="form-control" name="aula">
                             <option [ngValue]="undefined">--- Seleccionar una aula ---</option>
                             <option *ngFor="let aula of aulas" [ngValue]="aula">{{ aula.nombre }}</option>
                         </select>

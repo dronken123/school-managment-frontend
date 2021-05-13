@@ -27,7 +27,7 @@ export class AulaFormComponent implements OnInit {
     
     this.estudianteService.getEstudiantes()
         .subscribe((response: Estudiante[]) => {
-          this.estudiantes = response.filter(e => e.aula === null);
+          this.estudiantes = response.filter((e: Estudiante) => e.aulaEstudiante == null);
         });
     
   }
@@ -72,20 +72,21 @@ export class AulaFormComponent implements OnInit {
     
     this.estudiantes = this.estudiantes.filter(e => e.id != estudiante.id);
     this.listaEstudiantes.push([estudiante.nombres, estudiante.apellidoPaterno, estudiante.apellidoMaterno, estudiante.dni,estudiante.id]);
-    estudiante.aula = this.aula;
+    estudiante.aulaEstudiante = this.aula;
+    
     this.estudianteService.updateEstudiante(estudiante)
                           .subscribe();
-
-
   }
 
   quitarEstudiante(estudiante: any): void {
     let estudianteFound: Estudiante = new Estudiante();
     
     this.listaEstudiantes = this.listaEstudiantes.filter(e => e[4] != estudiante[4]);
-    this.estudianteService.getEstudiante(estudiante[4]).subscribe(response =>{
+    this.estudianteService.getEstudiante(estudiante[4]).subscribe((response) =>{
+      
       estudianteFound = response;
-      estudianteFound.aula = null;
+      console.log(estudianteFound);
+      estudianteFound.aulaEstudiante = null;
       this.estudianteService.updateEstudiante(estudianteFound).subscribe();
       this.estudiantes.push(estudianteFound);
     });
