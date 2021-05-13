@@ -23,7 +23,9 @@ export class AulasComponent implements OnInit {
         .subscribe(response => this.aulas = response);
 
     this.estudianteService.getEstudiantes()
-        .subscribe(response => this.estudiantes = response);
+        .subscribe(response => {
+          this.estudiantes = response.filter(e => e.aula === null);
+        });
   }
 
 }

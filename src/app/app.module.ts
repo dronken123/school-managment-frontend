@@ -12,13 +12,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ClasesComponent } from './dashboard/clases/clases.component';
 import { FormComponentClase } from './dashboard/clases/form/form.component';
 import { AulasComponent } from './dashboard/aulas/aulas.component';
+import { AulaFormComponent } from './dashboard/aulas/aula-form/aula-form.component';
 
 export const routes: Routes = [
   { path: '', component: EstudiantesComponent },
   { path: 'estudiantes/form', component: FormComponent },
   { path: 'estudiantes/form/:id', component: FormComponent },
   { path: 'clases/form', component: FormComponentClase},
-  { path: 'aulas', component: AulasComponent}
+  { path: 'clases', component: ClasesComponent},
+  { path: 'aulas', component: AulasComponent},
+  { path: 'aulas/form', component: AulaFormComponent},
+  { path: 'aulas/form/:id', component: AulaFormComponent}
 ];
 
 @NgModule({
@@ -30,7 +34,8 @@ export const routes: Routes = [
     FormComponentClase,
     DashboardComponent,
     ClasesComponent,
-    AulasComponent
+    AulasComponent,
+    AulaFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Aula } from 'src/app/models/aula';
 import { Clase } from 'src/app/models/clase';
 import { Curso } from 'src/app/models/curso';
@@ -17,7 +18,7 @@ export class FormComponentClase implements OnInit {
   cursos: Curso[] = [];
   aulas: Aula[] = [];
 
-  constructor(private aulaService: AulaService, private cursoService: CursoService, private claseService: ClaseService) { }
+  constructor(private aulaService: AulaService, private cursoService: CursoService, private claseService: ClaseService, private router: Router) { }
 
   ngOnInit(): void {
     this.aulaService.getAulas()
@@ -35,7 +36,9 @@ export class FormComponentClase implements OnInit {
 
   crear(): void{
     this.claseService.saveClase(this.clase)
-        .subscribe(response => console.log('Clase creada: ', this.clase));
+        .subscribe(response => {
+          this.router.navigate(['/clases']);
+        });
   }
 
   actualizar(): void{

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Aula } from 'src/app/models/aula';
 import { Curso } from 'src/app/models/curso';
 import { Estudiante } from 'src/app/models/estudiante';
+import { AulaService } from 'src/app/services/aula.service';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 
 @Component({
@@ -12,15 +14,22 @@ import { EstudianteService } from 'src/app/services/estudiante.service';
 export class FormComponent implements OnInit {
 
   estudiante: Estudiante = new Estudiante();
+  aulas: Aula[] = [];
 
   errores: string[] = [];
 
   constructor(private estudianteService: EstudianteService,
+              private aulaService: AulaService,
               private router: Router,
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.cargarEstudiante();
+
+    this.aulaService.getAulas()
+        .subscribe(response => {
+          this.aulas = response;
+        });
   }
 
   cargarEstudiante(){

@@ -1,30 +1,37 @@
 <h1>Actualización de secciones</h1>
+<button class="btn btn-outline-success" [routerLink]="[ '/aulas/form']">Crear Aula</button>
 <hr>
 
 <div class="col-md-12 row">
-<div class="col-md-6">
+  <div class="col-md-6">
     <h4>Lista de secciones</h4>
     <hr>
     <div *ngFor="let aula of aulas" class="card mb-3" style="width: 20rem;">
+      <a [routerLink]="[ '/aulas/form', aula.id ]" style="text-decoration: none; color: inherit;">
         <div class="card-header bg-success text-white">
-            Sección {{aula.seccion}}
+          Sección {{aula.seccion}}
         </div>
         <ul class="list-group list-group-flush">
           <div class="row p-3">
-              <div class="col-md-8">Estudiantes: {{aula.listaEstudiantes.length}}</div>
-              <div class="col-md-4"><button class="btn btn-light btn-sm">Agregar</button></div>
+            <div class="col-md-8">Estudiantes: {{aula.listaEstudiantes.length}}</div>
+            <div class="col-md-4"><button class="btn btn-light btn-sm">Agregar</button></div>
           </div>
         </ul>
-      </div>
-</div>
-<div class="col-md-6 ">
+      </a>
+    </div>
+  </div>
+  <div class="col-md-6 ">
     <h4>Estudiantes sin asignar</h4>
     <hr>
-    <div class="card">
-        <ul class="list-group list-group-flush">
-          <li *ngFor="let estudiante of estudiantes" class="list-group-item">{{estudiante.nombres}} {{estudiante.apellidoPaterno}} {{estudiante.apellidoMaterno}}</li>
-        </ul>
-      </div>
-</div>
+    <div class="card" *ngIf="estudiantes.length > 0">
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let estudiante of estudiantes" class="list-group-item">{{estudiante.nombres}}
+          {{estudiante.apellidoPaterno}} {{estudiante.apellidoMaterno}}</li>
+      </ul>
+    </div>
+    <div class="alert alert-info" role="alert" *ngIf="estudiantes.length == 0">
+      No hay nuevos estudiantes para asignar.
+    </div>
+  </div>
 
 </div>

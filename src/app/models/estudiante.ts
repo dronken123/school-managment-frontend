@@ -1,3 +1,5 @@
+import { Aula } from "./aula";
+
 export class Estudiante {
     id: number;
     nombres: string;
@@ -7,4 +9,5 @@ export class Estudiante {
     dni: string;
     sexo: string;
     correo: string;
+    aula: Aula;
 }

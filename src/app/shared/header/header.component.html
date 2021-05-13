@@ -1,9 +1,17 @@
-<nav class="navbar navbar-light bg-light mb-3">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <i class="fas fa-atom" style="margin-right: 10px; margin-left: 10px;"></i>
         <span class="mr-2">School Managment</span>
       </a>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active" [routerLink]="[ '/']">Estudiantes</a>
+          <a class="nav-link active" [routerLink]="[ '/aulas']">Aulas</a>
+          <a class="nav-link active" [routerLink]="[ '/clases']">Clases</a>
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </div>
+      </div>
     </div>
   </nav>
   

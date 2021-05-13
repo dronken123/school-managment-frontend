@@ -1,0 +1,19 @@
+<h1>Lista de clases</h1>
+<button class="btn btn-outline-success"  [routerLink]="[ '/clases/form']">Crear Clase</button>
+<hr>
+
+<div class="row">
+    
+    <div class="card me-3" style="width: 18rem;" *ngFor="let clase of clases">
+        <a class="" [routerLink]="[ '/clases/form']" style="text-decoration: none; color: inherit;">
+        <div class="card-body">
+          <h5 class="card-title">{{clase.nombre}}</h5>
+          <hr>
+          <h6 class="card-subtitle mb-2 text-muted">{{clase.curso.nombre}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">{{clase.aula.nombre}}</h6>
+          
+        </div>
+    </a>
+      </div>
+    
+</div>
