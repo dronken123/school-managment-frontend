@@ -1,19 +1,71 @@
-<div class="container">
 
     <ul class="alert alert-danger" *ngIf="errores?.length > 0">
         <li *ngFor="let error of errores" class="ms-4">{{ error }}</li>
     </ul>
 
 
-    <div class="card " style="background-color: #f8f9fa;">
+    <div class="card">
         <div class="card-header">Registro de estudiantes</div>
         <h4 class="card-title">
-            <a [routerLink]="['/']" class="btn btn-light">&laquo; regresar</a>
+            <a [routerLink]="['/dashboard/estudiantes']" class="btn btn-light">&laquo; regresar</a>
         </h4>
         
         <div class="card-body">
             <form>
-                <div class="form-group row mb-2">
+                <div class="row">
+                    <div class="form-group col-sm-4">
+                        <label for="nombres" class="input-label">Nombres</label>
+                        <input type="text" class="form-control" name="nombres" [(ngModel)]="estudiante.nombres">
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="apellidoPaterno" class="input-label">Apellido Paterno</label>
+                        <input type="text" class="form-control" name="apellidoPaterno" [(ngModel)]="estudiante.apellidoPaterno">
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="apellidoMaterno" class="input-label">Apellido Materno</label>
+                        <input type="text" class="form-control" name="apellidoMaterno" [(ngModel)]="estudiante.apellidoMaterno">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-group col-sm-4">
+                        <label for="dni" class="input-label">DNI</label>
+                        <input type="text" class="form-control" name="dni" [(ngModel)]="estudiante.dni">
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="fechaNacimiento" class="input-label">Fecha de Nacimiento</label>
+                        <input type="text" class="form-control" name="fechaNacimiento" [(ngModel)]="estudiante.fechaNacimiento">
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="celular" class="input-label">Nro. Celular</label>
+                        <input type="text" class="form-control" name="celular" [(ngModel)]="estudiante.celular">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-group col-sm-4">
+                        <label for="sexo" class="input-label">Sexo</label>
+                        <input type="text" class="form-control" name="sexo" [(ngModel)]="estudiante.sexo">
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="correo" class="input-label">Correo</label>
+                        <input type="text" class="form-control" name="correo" [(ngModel)]="estudiante.correo">
+                    </div>
+                    <div class="form-group col-sm-4">
+                        <label for="aula" class="input-label">Aula</label>
+                        <div>
+                            <select [compareWith]="compararAula" [(ngModel)]="estudiante.aulaEstudiante" class="form-control" name="aula">
+                                <option [ngValue]="undefined">--- Seleccionar una aula ---</option>
+                                <option *ngFor="let aula of aulas" [ngValue]="aula">{{ aula.nombre }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                <div class="form-group">
+                    <label for="domicilio" class="input-label">Domicilio del estudiante</label>
+                    <input type="text" class="form-control" name="domicilio" [(ngModel)]="estudiante.domicilio">
+                </div>
+                </div>
+                <!-- <div class="form-group row mb-2">
                     <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" [(ngModel)]="estudiante.nombres" name="nombre">
@@ -49,26 +101,18 @@
                     <div class="col-sm-8">
                         <input type="text" class="form-control" [(ngModel)]="estudiante.sexo" name="sexo">
                     </div>
-                </div>
+                </div> -->
 
-                <div class="form-group row">
-                    <label for="aula" class="col-form-label col-sm-2">Aula</label>
-                    <div class="col-sm-8">
-                        <select [(ngModel)]="estudiante.aulaEstudiante" class="form-control" name="aula">
-                            <option [ngValue]="undefined">--- Seleccionar una aula ---</option>
-                            <option *ngFor="let aula of aulas" [ngValue]="aula">{{ aula.nombre }}</option>
-                        </select>
-                    </div>
-                </div>
+
 
                 <div class="form-group row">
                     <div class="col-sm-8">
-                        <button *ngIf="!estudiante.id" class="btn btn-primary" (click)="crear()">Crear</button>
-                        <button *ngIf="estudiante.id" class="btn btn-primary" (click)="actualizar()">Actualizar</button>
+                        <button *ngIf="!estudiante.id" class="btn" (click)="crear()">Crear</button>
+                        <button *ngIf="estudiante.id" class="btn mt-3" style="background-color: #164e85; border-color: #164e85; color: #fff;"
+                           (click)="actualizar()">Actualizar</button>
                     </div>
                 </div>
 
             </form>
         </div>
     </div>
-</div>

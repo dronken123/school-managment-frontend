@@ -1,0 +1,22 @@
+#navbar {
+    background: #164E85;
+    color: white;
+}
+
+#navbar #logo{
+    color: white;
+    font-size: 18px;
+}
+
+ ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+ul li {
+    padding: 0 10px;
+    cursor: pointer;
+    font-size: 14px;
+}

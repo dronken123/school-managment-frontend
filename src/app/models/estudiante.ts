@@ -1,3 +1,4 @@
+import { Apoderado } from "./apoderado";
 import { Aula } from "./aula";
 
 export class Estudiante {
@@ -7,7 +8,10 @@ export class Estudiante {
     apellidoMaterno: string;
     fechaNacimiento: string;
     dni: string;
+    domicilio: string;
+    celular: string;
     sexo: string;
     correo: string;
+    apoderado: Apoderado;
     aulaEstudiante: Aula;
 }

@@ -1,30 +1,35 @@
-<h1>Lista de estudiantes</h1>
-<button class="btn btn-outline-success"  [routerLink]="[ '/estudiantes/form']">Crear estudiante</button>
-<hr>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Apellido Paterno</th>
-            <th>Apellido Materno</th>
-            <th>DNI</th>
-            <th>Fecha Nacimiento</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let estudiante of listaEstudiantes">
-            <td><button class="btn btn-primary">{{estudiante.id}}</button></td>
-            <td>{{estudiante.nombres}}</td>
-            <td>{{estudiante.apellidoPaterno}}</td>
-            <td>{{estudiante.apellidoMaterno}}</td>
-            <td>{{estudiante.dni}}</td>
-            <td>{{estudiante.fechaNacimiento}}</td>
-            <td>
-                <button class="btn btn-outline-secondary me-2"  [routerLink]="[ '/estudiantes/form', estudiante.id ]">Actualizar</button>
-                <button class="btn btn-outline-danger" (click)="eliminar(estudiante)">Eliminar</button>
-            </td>
-        </tr>
-    </tbody>
-  </table>
+<h4>Estudiantes Registrados</h4>
+<button class="btn"  [routerLink]="[ '/dashboard/matriculas/form']">Nueva matrícula</button>
+<div class="card mt-2">
+        <div class="alert alert-info mb-0" role="alert" *ngIf="listaEstudiantes.length == 0">
+            No hay estudiantes registrados. Registre estudiantes.
+          </div>
+        <table class="table-estudiantes" *ngIf="listaEstudiantes.length > 0">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Ape. Paterno</th>
+                    <th>Ape. Materno</th>
+                    <th>DNI</th>
+                    <th>Fecha Nacimiento</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let estudiante of listaEstudiantes">
+                    <td><button class="btn btn-primary">{{estudiante.id}}</button></td>
+                    <td>{{estudiante.nombres}}</td>
+                    <td>{{estudiante.apellidoPaterno}}</td>
+                    <td>{{estudiante.apellidoMaterno}}</td>
+                    <td>{{estudiante.dni}}</td>
+                    <td>{{estudiante.fechaNacimiento}}</td>
+                    <td>
+                        <button class="btn me-2"  [routerLink]="[ 'form', estudiante.id ]"><i class="far fa-edit"></i></button>
+                        <button class="btn btn-eliminar " (click)="eliminar(estudiante)"><i class="far fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+          </table>
+
+</div>

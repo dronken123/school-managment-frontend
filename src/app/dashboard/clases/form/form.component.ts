@@ -6,6 +6,7 @@ import { Curso } from 'src/app/models/curso';
 import { AulaService } from 'src/app/services/aula.service';
 import { ClaseService } from 'src/app/services/clase.service';
 import { CursoService } from 'src/app/services/curso.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form',
@@ -37,7 +38,12 @@ export class FormComponentClase implements OnInit {
   crear(): void{
     this.claseService.saveClase(this.clase)
         .subscribe(response => {
-          this.router.navigate(['/clases']);
+          this.router.navigate(['/dashboard/clases']);
+          Swal.fire(
+            'Clase creada',
+            'La clase se ha creado con éxito',
+            'success'
+          )
         });
   }
 

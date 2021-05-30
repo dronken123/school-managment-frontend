@@ -1,67 +1,196 @@
-<div class="container">
-
-    <div class="card " style="background-color: #f8f9fa;">
-        <div class="card-header">Registro de clase</div>
-        
-        <div class="card-body">
-            <form>
-                <div class="form-group row mb-2">
-                    <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" [(ngModel)]="aula.nombre" name="nombre">
-                    </div>
-                </div>
-
-                <div class="form-group row mb-2">
-                    <label for="seccion" class="col-form-label col-sm-2">Sección</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" [(ngModel)]="aula.seccion" name="seccion">
-                    </div>
-                </div>
-                <div class="form-group row mb-4">
-                    <div class="col-sm-8">
-                        <button *ngIf="!aula.id" class="btn btn-primary" (click)="crear()">Crear</button>
-                        <button *ngIf="aula.id" class="btn btn-primary" (click)="actualizar()">Actualizar</button>
-                    </div>
-                </div>
-                <div *ngIf="aula.id">
-                <div class="">
-                    <p>Haga clic para agregar o quitar estudiantes del salón.</p>
-                </div>
-                <hr>
-                <div class="row">
-   
-                    <div class="col-sm-6">
-                        <div>
-                            <h6>Lista de Estudiantes</h6>
-                        </div>
-                        <ul class="list-group list-group-flush" *ngIf="listaEstudiantes.length > 0">
-                            <div class="card">
-                                <ul class="list-group list-group-flush">
-                                  <li *ngFor="let estudiante of listaEstudiantes" (click)="quitarEstudiante(estudiante)" class="list-group-item list-group-item-action" style="cursor: pointer;">{{estudiante[0]}} {{estudiante[1]}} {{estudiante[2]}} - {{estudiante[3]}}</li>
-                                </ul>
-                              </div>
-                        </ul>
-                        <div class="alert alert-info" role="alert" *ngIf="listaEstudiantes.length == 0">
-                            No hay estudiantes en el aula.
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div>
-                            <h6>Estudiantes sin asignar</h6>
-                        </div>
-                        <div class="card" *ngIf="estudiantes.length > 0">
-                            <ul class="list-group list-group-flush">
-                              <li *ngFor="let estudianteNoAsign of estudiantes" (click)="agregarEstudiante(estudianteNoAsign)" class="list-group-item list-group-item-action"  style="cursor: pointer;">{{estudianteNoAsign.nombres}} {{estudianteNoAsign.apellidoPaterno}} {{estudianteNoAsign.apellidoMaterno}} - {{estudianteNoAsign.dni}}</li>
-                            </ul>
-                        </div>
-                        <div class="alert alert-info" role="alert" *ngIf="estudiantes.length == 0">
-                                No hay nuevos estudiantes para asignar.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </form>
+<div class="card">
+  <div class="card-header">
+    <h6 *ngIf="!aula.id" class="mb-0">Registro de aula</h6>
+    <h6 *ngIf="aula.id" class="mb-0">Actualizar aula</h6>
+  </div>
+  <h4 class="card-title">
+    <a [routerLink]="['/dashboard/aulas']" class="btn btn-light">&laquo; regresar</a>
+  </h4>
+  <div class="card-body">
+    <form>
+      <div class="row mb-2">
+        <div class="col-4">
+          <label for="turno" class="ms-1">Turno</label>
+          <div class="col-sm-12">
+            <select [(ngModel)]="aula.turno" class="form-control form-select" name="turno">
+              <option [ngValue]="undefined">
+                --- Seleccionar un turno ---
+              </option>
+              <option *ngFor="let turno of turnos" [ngValue]="turno">
+                {{ turno }}
+              </option>
+            </select>
+          </div>
         </div>
+        <div class="col-4">
+          <label for="nivel" class="ms-1">Nivel</label>
+          <div class="col-sm-12">
+            <select [(ngModel)]="aula.nivel" class="form-control form-select" name="nivel">
+              <option [ngValue]="undefined">
+                --- Seleccionar un nivel ---
+              </option>
+              <option *ngFor="let nivel of niveles" [ngValue]="nivel">
+                {{ nivel }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-4">
+          <label for="grado" class="ms-1">Grado</label>
+          <div class="col-sm-12">
+            <select [compareWith]="compararGrado" [(ngModel)]="aula.grado" class="form-control form-select"
+              name="grado">
+              <option [ngValue]="undefined">
+                --- Seleccionar un grado ---
+              </option>
+              <option *ngFor="let grado of grados" [ngValue]="grado">
+                {{ grado.nombre }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="mb-2 col-6">
+          <label for="nombre" class="col-form-label">Nombre</label>
+          <div>
+            <input type="text" class="form-control" [(ngModel)]="aula.nombre" name="nombre" />
+          </div>
+        </div>
+
+        <div class="mb-2 col-6">
+          <label for="seccion" class="col-form-label">Sección</label>
+          <div>
+            <input type="text" class="form-control" [(ngModel)]="aula.seccion" name="seccion" />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-8">
+          <button *ngIf="!aula.id" class="btn btn-color" (click)="crear()">
+            Crear
+          </button>
+          <button *ngIf="aula.id" class="btn btn-color" (click)="actualizar()">
+            Actualizar
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-4" *ngIf="aula.id">
+        <hr />
+        <h6>Clases asignadas</h6>
+        <hr />
+        <div>
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item mb-3 mt-2" *ngFor="let clase of aula.clasesAula">
+              <span data-bs-toggle="tooltip" data-bs-placement="top" title="Ver clase"
+                style="cursor: pointer">{{ clase.nombre }}</span>
+              <i class="far fa-trash-alt text-danger ms-4" (click)="quitarClase(clase)" style="cursor: pointer"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar"></i>
+            </li>
+            <button type="button" class="btn list-group-item list-group-item-primary mb-3 mt-2" data-bs-toggle="modal"
+              data-bs-target="#crearClaseModal">
+              <span>CREAR CLASE</span>
+              <i class="fas fa-plus ms-4"></i>
+            </button>
+          </ul>
+        </div>
+        <hr />
+      </div>
+
+      <div *ngIf="aula.id">
+        <div class="">
+          <h6>Haga clic para agregar o quitar estudiantes del salón.</h6>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="mb-4">
+              <h6>
+                Estudiantes asignados a {{ aula.nombre }} {{ aula.seccion }}
+              </h6>
+            </div>
+            <ul class="list-group list-group-flush" *ngIf="listaEstudiantes.length > 0">
+              <div class="card">
+                <ul class="list-group list-group-flush">
+                  <li *ngFor="let estudiante of listaEstudiantes" (click)="quitarEstudiante(estudiante)"
+                    class="list-group-item list-group-item-action" style="cursor: pointer">
+                    {{ estudiante[0] }} {{ estudiante[1] }}
+                    {{ estudiante[2] }} - {{ estudiante[3] }}
+                  </li>
+                </ul>
+              </div>
+            </ul>
+            <div class="alert alert-info" role="alert" *ngIf="listaEstudiantes.length == 0">
+              No hay estudiantes en el aula.
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mb-4">
+              <h6>Estudiantes sin asignar</h6>
+            </div>
+            <div class="card" *ngIf="estudiantes.length > 0">
+              <ul class="list-group list-group-flush">
+                <li *ngFor="let estudianteNoAsign of estudiantes" (click)="agregarEstudiante(estudianteNoAsign)"
+                  class="list-group-item list-group-item-action" style="cursor: pointer">
+                  {{ estudianteNoAsign.nombres }}
+                  {{ estudianteNoAsign.apellidoPaterno }}
+                  {{ estudianteNoAsign.apellidoMaterno }} -
+                  {{ estudianteNoAsign.dni }}
+                </li>
+              </ul>
+            </div>
+            <div class="alert alert-info" role="alert" *ngIf="estudiantes.length == 0">
+              No hay nuevos estudiantes para asignar.
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="crearClaseModal" tabindex="-1" aria-labelledby="crearClaseModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="crearClaseModalLabel">Nueva clase</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #claseForm="ngForm">
+          <div class="row mb-2">
+            <div class="col-12">
+              <label for="nombreClase" class="ms-1">Nombre</label>
+              <div class="col-sm-12">
+                <input type="text" class="form-control" [(ngModel)]="claseNueva.nombre" name="nombreClase" />
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="cursoClase" class="ms-1">Curso</label>
+              <div class="col-sm-12">
+                <select [(ngModel)]="claseNueva.curso" class="form-control form-select" name="cursoClase">
+                  <option [ngValue]="undefined">
+                    --- Seleccionar un curso ---
+                  </option>
+                  <option *ngFor="let curso of cursos" [ngValue]="curso">
+                    {{ curso.nombre }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button type="button" class="btn btn-color" (click)="agregarClase(claseForm)">
+          Crear clase
+        </button>
+      </div>
     </div>
+  </div>
 </div>

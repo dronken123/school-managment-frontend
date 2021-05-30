@@ -59,7 +59,7 @@ export class FormComponent implements OnInit {
   actualizar(){
     this.estudianteService.updateEstudiante(this.estudiante)
         .subscribe(response => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/dashboard/estudiantes']);
         },
         err => {
           this.errores = err.error.errors as string[];
@@ -68,5 +68,9 @@ export class FormComponent implements OnInit {
         );
   }
 
+  compararAula(o1: Aula, o2:Aula): boolean{
+    if(o1 === undefined && o2 === undefined) return true;
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false: o1.id == o2.id;
+  }
 
 }

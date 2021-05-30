@@ -20,4 +20,12 @@ export class ClaseService {
     return this.http.post<Clase>(this.urlEndPoint+'/crear', clase);
   }
 
+  updateClase(clase: Clase): Observable<Clase>{
+    return this.http.put<Clase>(`${this.urlEndPoint}/${clase.id}`, clase);
+  }
+
+  deleteClase(id: number): Observable<Clase>{
+    return this.http.delete<Clase>(`${this.urlEndPoint}/${id}`)
+  }
+
 }

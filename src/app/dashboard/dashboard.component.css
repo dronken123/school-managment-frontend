@@ -1,0 +1,36 @@
+.container-dashboard{
+  min-height: calc(100vh - 53px);
+}
+
+#sidebar {
+  background: #f8f9fa;
+  width: 220px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  z-index: 100;
+}
+
+#dashboard{
+  margin-left: 220px;
+  height: 100%;
+}
+
+ul li a{
+  font-weight: 400;
+  padding-left: 1.4rem;
+  color: #030303;
+  display: block;
+  font-size: 1rem;
+}
+
+ul li:hover, ul li a:hover {
+  background: white;
+}
+
+.dashboard{
+  min-height: calc(100vh - 53px);
+  
+}
+

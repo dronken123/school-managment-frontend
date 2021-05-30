@@ -17,7 +17,7 @@
                     <div class="col-sm-8">
                         <select [(ngModel)]="clase.aula" class="form-control" name="aula">
                             <option [ngValue]="undefined">--- Seleccionar una clase ---</option>
-                            <option *ngFor="let aula of aulas" [ngValue]="aula">{{ aula.nombre }}</option>
+                            <option *ngFor="let aula of aulas" [ngValue]="aula">{{ aula.nombre }} {{aula.seccion}}</option>
                         </select>
                     </div>
                 </div>

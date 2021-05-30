@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Aula } from '../models/aula';
+import { Grado } from '../models/grado';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,11 @@ export class AulaService {
 
   updateAula(aula: Aula): Observable<Aula>{
     return this.http.put<Aula>(`${this.urlEndPoint}/${aula.id}`, aula);
+  }
+
+  /*Sección para acceso a métodos de la clase GRADO*/
+  getGrados(): Observable<Grado[]>{
+    return this.http.get<Grado[]>(`${this.urlEndPoint}/grados`);
   }
 
 }
