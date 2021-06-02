@@ -17,6 +17,7 @@ export class MatriculaFormComponent implements OnInit {
   estudiante: Estudiante = new Estudiante();
   apoderado: Apoderado = new Apoderado();
   matricula: Matricula = new Matricula();
+  sexo: string[] = ['MASCULINO', 'FEMENINO'];
 
   constructor(private matriculaService: MatriculaService, private router: Router) { }
 

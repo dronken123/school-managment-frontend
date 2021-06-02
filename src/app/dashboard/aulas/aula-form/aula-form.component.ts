@@ -101,14 +101,13 @@ export class AulaFormComponent implements OnInit {
     claseAgregada.nombre = this.claseNueva.nombre;
     claseAgregada.curso = this.claseNueva.curso;
     claseAgregada.aula = this.aula;
-    
     //insertamos la clase que se asignó los datos
-    this.claseService.saveClase(claseAgregada).subscribe(response => {
+    this.claseService.saveClase(claseAgregada).subscribe(clase => {
       this.aula.clasesAula.push(claseAgregada);
 
       //Se llama nuevamente al aula porque al crear la clase, el ID no se genera hasta recargar la página
       this.aulaService.getAula(this.aula.id).subscribe(response => this.aula = response);
-
+      
       //limpiamos el fomulario
       claseForm.controls['nombreClase'].setValue('');
       claseForm.controls['cursoClase'].setValue(undefined);

@@ -47,14 +47,14 @@
                     </div>
                     <div class="form-group col-sm-4">
                         <label for="correo" class="input-label">Correo</label>
-                        <input type="text" class="form-control" name="correo" [(ngModel)]="estudiante.correo">
+                        <input type="text" class="form-control" name="correo" [(ngModel)]="estudiante.correo" disabled>
                     </div>
                     <div class="form-group col-sm-4">
                         <label for="aula" class="input-label">Aula</label>
                         <div>
                             <select [compareWith]="compararAula" [(ngModel)]="estudiante.aulaEstudiante" class="form-control" name="aula">
                                 <option [ngValue]="undefined">--- Seleccionar una aula ---</option>
-                                <option *ngFor="let aula of aulas" [ngValue]="aula">{{ aula.nombre }}</option>
+                                <option *ngFor="let aula of aulas" [ngValue]="aula">{{ aula.nombre }}{{aula.seccion}}</option>
                             </select>
                         </div>
                     </div>

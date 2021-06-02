@@ -49,9 +49,18 @@
             </div>
         </div>
         <div class="row mt-2">
-        <div class="form-group">
+        <div class="form-group col-sm-6">
             <label for="domicilio" class="input-label">Domicilio del estudiante</label>
             <input type="text" class="form-control" name="domicilio" [(ngModel)]="matricula.estudiante.domicilio">
+        </div>
+        <div class="form-group col-sm-6">
+            <label for="sexo" class="input-label">Sexo</label>
+                    <div class="col-sm-12">
+                        <select [(ngModel)]="matricula.estudiante.sexo" class="form-control" name="sexo">
+                            <option [ngValue]="undefined">--- Seleccionar sexo ---</option>
+                            <option *ngFor="let s of sexo" [ngValue]="s">{{s}}</option>
+                        </select>
+                    </div>
         </div>
         </div>
         <h5 class="mt-4">Datos del apoderado</h5>
