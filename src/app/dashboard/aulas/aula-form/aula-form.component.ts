@@ -10,6 +10,7 @@ import { AulaService } from 'src/app/services/aula.service';
 import { ClaseService } from 'src/app/services/clase.service';
 import { CursoService } from 'src/app/services/curso.service';
 import { EstudianteService } from 'src/app/services/estudiante.service';
+import { GradoService } from 'src/app/services/grado.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -36,12 +37,13 @@ export class AulaFormComponent implements OnInit {
               private claseService: ClaseService,
               private cursoService: CursoService,
               private router: Router,
+              private gradoService: GradoService,
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.cargarAula();
 
-    this.aulaService.getGrados()
+    this.gradoService.getGrados()
         .subscribe(response => this.grados = response);
 
     this.cursoService.getCursos().subscribe(response => this.cursos = response);
@@ -128,7 +130,7 @@ export class AulaFormComponent implements OnInit {
       text: `Está apunto de eliminar la clase ${clase.nombre}`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#164e85',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sí, eliminar!'
     }).then((result) => {

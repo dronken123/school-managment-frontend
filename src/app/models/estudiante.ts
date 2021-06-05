@@ -1,5 +1,6 @@
 import { Apoderado } from "./apoderado";
 import { Aula } from "./aula";
+import { Grado } from "./grado";
 
 export class Estudiante {
     id: number;
@@ -14,4 +15,5 @@ export class Estudiante {
     correo: string;
     apoderado: Apoderado;
     aulaEstudiante: Aula;
+    grado: Grado;
 }

@@ -38,7 +38,7 @@
         <div class="col-4">
           <label for="grado" class="ms-1">Grado</label>
           <div class="col-sm-12">
-            <select [compareWith]="compararGrado" [(ngModel)]="aula.grado" class="form-control form-select"
+            <select [compareWith]="compararGrado" [(ngModel)]="aula.gradoAula" class="form-control form-select"
               name="grado">
               <option [ngValue]="undefined">
                 --- Seleccionar un grado ---
@@ -51,17 +51,23 @@
         </div>
       </div>
       <div class="row mb-2">
-        <div class="mb-2 col-6">
+        <div class="mb-2 col-4">
           <label for="nombre" class="col-form-label">Nombre</label>
           <div>
             <input type="text" class="form-control" [(ngModel)]="aula.nombre" name="nombre" />
           </div>
         </div>
 
-        <div class="mb-2 col-6">
+        <div class="mb-2 col-4">
           <label for="seccion" class="col-form-label">Sección</label>
           <div>
             <input type="text" class="form-control" [(ngModel)]="aula.seccion" name="seccion" />
+          </div>
+        </div>
+        <div class="mb-2 col-4">
+          <label for="capacidad" class="col-form-label">Capacidad</label>
+          <div>
+            <input type="text" class="form-control" [(ngModel)]="aula.capacidad" name="capacidad" />
           </div>
         </div>
       </div>
@@ -151,7 +157,7 @@
   </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="crearClaseModal" tabindex="-1" aria-labelledby="crearClaseModalLabel" aria-hidden="true">
+<div class="modal fade" id="crearClaseModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="crearClaseModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

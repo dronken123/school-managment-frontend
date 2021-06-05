@@ -41,15 +41,26 @@
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="form-group col-sm-4">
-                        <label for="sexo" class="input-label">Sexo</label>
-                        <input type="text" class="form-control" name="sexo" [(ngModel)]="estudiante.sexo">
-                    </div>
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-3">
                         <label for="correo" class="input-label">Correo</label>
                         <input type="text" class="form-control" name="correo" [(ngModel)]="estudiante.correo" disabled>
                     </div>
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-3">
+                        <label for="sexo" class="input-label">Sexo</label>
+                        <input type="text" class="form-control" name="sexo" [(ngModel)]="estudiante.sexo">
+                    </div>
+
+                    <div class="form-group col-sm-3">
+                        <label for="grado" class="input-label">Grado</label>
+                                <div class="col-sm-12">
+                                    <select [compareWith]="compararGrado" [(ngModel)]="estudiante.grado" class="form-control" name="grado">
+                                        <option [ngValue]="undefined">--- Seleccionar grado ---</option>
+                                        <option *ngFor="let grado of grados" [ngValue]="grado">{{grado.nombre}}</option>
+                                    </select>
+                                </div>
+                    </div>
+                    
+                    <div class="form-group col-sm-3">
                         <label for="aula" class="input-label">Aula</label>
                         <div>
                             <select [compareWith]="compararAula" [(ngModel)]="estudiante.aulaEstudiante" class="form-control" name="aula">
@@ -58,6 +69,7 @@
                             </select>
                         </div>
                     </div>
+                    
                 </div>
                 <div class="row mt-2">
                 <div class="form-group">

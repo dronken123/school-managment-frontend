@@ -29,9 +29,4 @@ export class AulaService {
     return this.http.put<Aula>(`${this.urlEndPoint}/${aula.id}`, aula);
   }
 
-  /*Sección para acceso a métodos de la clase GRADO*/
-  getGrados(): Observable<Grado[]>{
-    return this.http.get<Grado[]>(`${this.urlEndPoint}/grados`);
-  }
-
 }

@@ -10,12 +10,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormComponent } from './dashboard/estudiantes/form/form.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ClasesComponent } from './dashboard/clases/clases.component';
-import { FormComponentClase } from './dashboard/clases/form/form.component';
 import { AulasComponent } from './dashboard/aulas/aulas.component';
 import { AulaFormComponent } from './dashboard/aulas/aula-form/aula-form.component';
 import { GradosComponent } from './dashboard/grados/grados.component';
 import { MatriculasComponent } from './dashboard/matriculas/matriculas.component';
 import { MatriculaFormComponent } from './dashboard/matriculas/matricula-form/matricula-form.component';
+import { CursosComponent } from './dashboard/cursos/cursos.component';
 
 export const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -23,12 +23,13 @@ export const routes: Routes = [
     { path: 'estudiantes', component: EstudiantesComponent },
     { path: 'estudiantes/form', component: FormComponent },
     { path: 'estudiantes/form/:id', component: FormComponent },
-    { path: 'clases/form', component: FormComponentClase},
     { path: 'clases', component: ClasesComponent},
     { path: 'aulas', component: AulasComponent},
     { path: 'aulas/form', component: AulaFormComponent},
     { path: 'aulas/form/:id', component: AulaFormComponent},
     { path: 'matriculas/form', component: MatriculaFormComponent },
+    { path: 'grados', component: GradosComponent },
+    { path: 'cursos', component: CursosComponent }
   ]}
 ];
 
@@ -38,14 +39,14 @@ export const routes: Routes = [
     EstudiantesComponent,
     HeaderComponent,
     FormComponent,
-    FormComponentClase,
     DashboardComponent,
     ClasesComponent,
     AulasComponent,
     AulaFormComponent,
     GradosComponent,
     MatriculasComponent,
-    MatriculaFormComponent
+    MatriculaFormComponent,
+    CursosComponent
   ],
   imports: [
     BrowserModule,

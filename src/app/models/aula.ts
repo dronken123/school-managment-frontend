@@ -8,7 +8,8 @@ export class Aula {
     seccion: string;
     nivel: string;
     turno: string;
-    grado: Grado;
+    gradoAula: Grado;
+    capacidad: number;
     listaEstudiantes: Estudiante[];
     clasesAula: Clase[]; 
 }
