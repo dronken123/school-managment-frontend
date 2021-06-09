@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Aula } from 'src/app/models/aula';
-import { Curso } from 'src/app/models/curso';
 import { Estudiante } from 'src/app/models/estudiante';
 import { Grado } from 'src/app/models/grado';
 import { AulaService } from 'src/app/services/aula.service';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 import { GradoService } from 'src/app/services/grado.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form',
@@ -65,6 +65,11 @@ export class FormComponent implements OnInit {
     this.estudianteService.updateEstudiante(this.estudiante)
         .subscribe(response => {
           this.router.navigate(['/dashboard/estudiantes']);
+          Swal.fire(
+            'Estudiante actualizado',
+            'El estudiante se ha actualizado con éxito',
+            'success'
+          )
         },
         err => {
           this.errores = err.error.errors as string[];

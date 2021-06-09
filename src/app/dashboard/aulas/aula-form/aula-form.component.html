@@ -139,11 +139,11 @@
             <div class="card" *ngIf="estudiantes.length > 0">
               <ul class="list-group list-group-flush">
                 <li *ngFor="let estudianteNoAsign of estudiantes" (click)="agregarEstudiante(estudianteNoAsign)"
-                  class="list-group-item list-group-item-action" style="cursor: pointer">
+                  class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" style="cursor: pointer">
                   {{ estudianteNoAsign.nombres }}
                   {{ estudianteNoAsign.apellidoPaterno }}
-                  {{ estudianteNoAsign.apellidoMaterno }} -
-                  {{ estudianteNoAsign.dni }}
+                  {{ estudianteNoAsign.apellidoMaterno }} 
+                  <span class="badge bg-primary rounded-pill" > {{estudianteNoAsign.grado.nombre}}</span>
                 </li>
               </ul>
             </div>

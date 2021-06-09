@@ -1,11 +1,14 @@
-#navbar {
-    background: #164E85;
-    color: white;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 
-#navbar #logo{
-    color: white;
-    font-size: 18px;
+#navbar {
+    background: #fff;
+    color: #164E85;
+    width: calc(100% - 220px);
+    position: relative;
+    left: 220px;
+    height: 53px;
+    box-shadow:  0 5px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
 }
 
  ul {

@@ -40,7 +40,10 @@ export class DashboardComponent implements OnInit {
     this.reporte = false;
   }
 
-  
+  mostrarEmpleados(){
+    this.router.navigate(['empleados'], {relativeTo: this.route});
+    this.reporte = false;
+  }
 
   mostrarDashboard(){
    this.reporte = true; 

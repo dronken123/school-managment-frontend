@@ -1,39 +1,17 @@
 
     <div class="container-dashboard">
-      <!-- <nav class="col-md-2 d-none d-md-block sidebar">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column hover mt-4">
-            <li class="nav-item">
-              <a class="nav-link" (click)="mostrarDashboard()" style="cursor: pointer;">
-                Dashboard <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" (click)="mostrarEstudiantes()" aria-expanded="false" style="cursor: pointer;">
-                Mantenimiento Estudiantes
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" (click)="mostrarAulas()" style="cursor: pointer;">
-                Mantenimiento Aulas
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " data-toggle="collapse" (click)="mostrarClases()" aria-expanded="false" style="cursor: pointer;">
-                Mantenimiento Clases
-              </a>
-            </li>
-  
-          </ul>
-        </div>
-      </nav> -->
+
       <div id="sidebar">
-        <div  style="margin-top: 80px;">
-          <ul class="nav flex-column hover mt-4 px-0 mx-0">
-            <li class="nav-item px-4 py-3 d-flex flex-row" (click)="mostrarDashboard()" style="cursor: pointer;">
-              <!-- <a class="nav-link row" (click)="mostrarDashboard()" style="cursor: pointer;">
-                <span>Dashboard </span><span class="me-4"><i class="fas fa-tachometer-alt"></i></span>
-              </a> -->
+        <div  >
+          <ul class="nav flex-column hover px-0 mx-0">
+            <li class="logo px-4 py-3 d-flex flex-row" (click)="mostrarDashboard()" >
+              <div class="col-12">
+                <i class="fas fa-atom"></i>
+                <span style="font-weight: 500; margin-left: 10px;">School Managment</span>
+              </div>
+            </li>
+            <li class="nav-item px-4 py-3 mt-3 d-flex flex-row" (click)="mostrarDashboard()" style="cursor: pointer;">
+
               <div class="col-9 ">
                 <span class="">Dashboard</span>
               </div>
@@ -42,9 +20,7 @@
               </div>
             </li>
             <li class="nav-item px-4 py-3 d-flex flex-row" (click)="mostrarEstudiantes()" style="cursor: pointer;">
-              <!-- <a class="nav-link row" data-toggle="collapse" (click)="mostrarEstudiantes()" aria-expanded="false" style="cursor: pointer;">
-               <span>Estudiantes</span> <span class="me-4"><i class="fas fa-child"></i></span>
-              </a> -->
+
               <div class="col-9 ">
                 <span class="col-sm-8">Estudiantes</span>
               </div>
@@ -52,12 +28,10 @@
                 <span class="me-4 col-sm-4"><i class="fas fa-child"></i></span>
               </div>
             </li>
-            <li class="nav-item px-4 py-3 d-flex flex-row" (click)="mostrarEstudiantes()" style="cursor: pointer;">
-              <!-- <a class="nav-link row" data-toggle="collapse" (click)="mostrarEstudiantes()" aria-expanded="false" style="cursor: pointer;">
-               <span style="margin-left: 0px;">Profesores</span> <span class="me-4"><i class="fas fa-chalkboard-teacher"></i></span>
-              </a> -->
+            <li class="nav-item px-4 py-3 d-flex flex-row" (click)="mostrarEmpleados()" style="cursor: pointer;">
+
               <div class="col-9">
-                <span class="">Profesores</span>
+                <span class="">Empleados</span>
               </div>
               <div class="col-3">
                 <span class="me-4"><i class="fas fa-chalkboard-teacher"></i></span>
@@ -80,9 +54,7 @@
               </div>
             </li>
             <li class="nav-item px-4 py-3 d-flex flex-row" (click)="mostrarGrados()" style="cursor: pointer;">
-              <!-- <a class="nav-link row" data-toggle="collapse" (click)="mostrarGrados()" aria-expanded="false" style="cursor: pointer;">
-               <span>Grados</span> <span class="me-4"><i class="fas fa-chalkboard"></i></span>
-              </a> -->
+
               <div class="col-9">
                 <span class="">Grados</span>
               </div>
@@ -95,8 +67,66 @@
         </div>
       </div>
       <div id="dashboard">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 " *ngIf="reporte">
-          <h1 class="h5 ms-4 ">Bienvenido Anderson Bengolea!</h1>
+        <div *ngIf="reporte">
+          <div class="admin">
+            Admin Dashboard 
+          </div>
+          <div class="cards">
+            <div class="card-item estudiante">
+              <div class="card-left">
+                <div class="title">Estudiantes</div>
+                <div class="info">250</div>
+              </div>
+              <div class="card-right">
+                <i class="fas fa-child fa-3x"></i>
+              </div>
+            </div>
+            <div class="card-item profesor">
+              <div class="card-left">
+                <div class="title">Profesores</div>
+                <div class="info">20</div>
+              </div>
+              <div class="card-right">
+                <i class="fas fa-chalkboard-teacher fa-3x"></i>
+              </div>
+            </div>
+            <div class="card-item aula">
+              <div class="card-left">
+                <div class="title">Aulas</div>
+                <div class="info">25</div>
+              </div>
+              <div class="card-right">
+                <i class="fas fa-school fa-3x"></i>
+              </div>
+            </div>
+            <div class="card-item cursos">
+              <div class="card-left">
+                <div class="title">Estudiantes</div>
+                <div class="info">250</div>
+              </div>
+              <div class="card-right">
+                <i class="fas fa-child fa-3x"></i>
+              </div>
+            </div>
+            
+          </div>
+          <div class="charts">
+            <div class="line-chart">
+              <div class="chart-title">Line Chart</div>
+              <hr>
+              <div class="chart-data">
+                <app-line-chart></app-line-chart>
+              </div>
+            </div>
+            <div class="pie-chart">
+              <div class="chart-title">Pie Chart</div>
+              <hr>
+              <div class="chart-data">
+                <app-pie-chart></app-pie-chart>
+              </div>
+            </div>
+          </div>
+
         </div>
   
         
@@ -105,19 +135,4 @@
           <router-outlet></router-outlet>
         </div>
       </div>
-        <!-- <main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-5 py-1 ">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" *ngIf="reporte">
-            <h1 class="h2">Dashboard</h1>
-          </div>
-    
-          
-          
-          <div *ngIf="!reporte">
-            <router-outlet></router-outlet>
-          </div>
-  
-        </main> -->
-        
-        
-  
       </div>

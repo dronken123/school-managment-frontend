@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Estudiante } from '../../models/estudiante';
 import { EstudianteService } from '../../services/estudiante.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-estudiantes',
@@ -17,6 +18,7 @@ export class EstudiantesComponent implements OnInit {
     this.estudianteService.getEstudiantes()
         .subscribe(response => {
           this.listaEstudiantes = response;
+          console.log(this.listaEstudiantes)
         });
   }
 

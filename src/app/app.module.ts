@@ -16,6 +16,10 @@ import { GradosComponent } from './dashboard/grados/grados.component';
 import { MatriculasComponent } from './dashboard/matriculas/matriculas.component';
 import { MatriculaFormComponent } from './dashboard/matriculas/matricula-form/matricula-form.component';
 import { CursosComponent } from './dashboard/cursos/cursos.component';
+import { LineChartComponent } from './dashboard/charts/line-chart/line-chart.component';
+import { PieChartComponent } from './dashboard/charts/pie-chart/pie-chart.component';
+import { EmpleadosComponent } from './dashboard/empleados/empleados.component';
+import { EmpleadoFormComponent } from './dashboard/empleados/empleado-form/empleado-form.component';
 
 export const routes: Routes = [
   { path: '', component: DashboardComponent },
@@ -29,7 +33,10 @@ export const routes: Routes = [
     { path: 'aulas/form/:id', component: AulaFormComponent},
     { path: 'matriculas/form', component: MatriculaFormComponent },
     { path: 'grados', component: GradosComponent },
-    { path: 'cursos', component: CursosComponent }
+    { path: 'cursos', component: CursosComponent },
+    { path: 'empleados', component: EmpleadosComponent },
+    { path: 'empleados/form', component: EmpleadoFormComponent },
+    { path: 'empleados/form/:id', component: EmpleadoFormComponent },
   ]}
 ];
 
@@ -46,7 +53,11 @@ export const routes: Routes = [
     GradosComponent,
     MatriculasComponent,
     MatriculaFormComponent,
-    CursosComponent
+    CursosComponent,
+    LineChartComponent,
+    PieChartComponent,
+    EmpleadosComponent,
+    EmpleadoFormComponent
   ],
   imports: [
     BrowserModule,
