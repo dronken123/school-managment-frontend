@@ -7,5 +7,4 @@ export class Apoderado {
     apellidoMaterno: string;
     dni: string;
     celular: string;
-    listaEstudianteM: Estudiante[];
 }

@@ -89,7 +89,7 @@
         <hr />
         <div>
           <ul class="list-group list-group-horizontal">
-            <li class="list-group-item mb-3 mt-2" *ngFor="let clase of aula.clasesAula">
+            <li class="list-group-item mb-3 mt-2" *ngFor="let clase of clasesAula">
               <span data-bs-toggle="tooltip" data-bs-placement="top" title="Ver clase"
                 style="cursor: pointer">{{ clase.nombre }}</span>
               <i class="far fa-trash-alt text-danger ms-4" (click)="quitarClase(clase)" style="cursor: pointer"
@@ -117,18 +117,22 @@
                 Estudiantes asignados a {{ aula.nombre }} {{ aula.seccion }}
               </h6>
             </div>
-            <ul class="list-group list-group-flush" *ngIf="listaEstudiantes.length > 0">
+            <ul class="list-group list-group-flush" *ngIf="aulaEstudiantes.length > 0">
               <div class="card">
                 <ul class="list-group list-group-flush">
-                  <li *ngFor="let estudiante of listaEstudiantes" (click)="quitarEstudiante(estudiante)"
-                    class="list-group-item list-group-item-action" style="cursor: pointer">
-                    {{ estudiante[0] }} {{ estudiante[1] }}
-                    {{ estudiante[2] }} - {{ estudiante[3] }}
+                  <li *ngFor="let estudiante of aulaEstudiantes" (click)="quitarEstudiante(estudiante)"
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" style="cursor: pointer">
+                    <!-- {{ estudiante[0] }} {{ estudiante[1] }}
+                    {{ estudiante[2] }} - {{ estudiante[3] }} -->
+                    {{estudiante.nombres}}
+                    {{ estudiante.apellidoPaterno }}
+                    {{ estudiante.apellidoMaterno }}
+                    <span class="badge bg-primary rounded-pill" > {{estudiante.grado.nombre}}</span>
                   </li>
                 </ul>
               </div>
             </ul>
-            <div class="alert alert-info" role="alert" *ngIf="listaEstudiantes.length == 0">
+            <div class="alert alert-info" role="alert" *ngIf="aulaEstudiantes.length == 0">
               No hay estudiantes en el aula.
             </div>
           </div>

@@ -10,6 +10,5 @@ export class Aula {
     turno: string;
     gradoAula: Grado;
     capacidad: number;
-    listaEstudiantes: Estudiante[];
-    clasesAula: Clase[]; 
+    cantidadEstudiante: number;
 }

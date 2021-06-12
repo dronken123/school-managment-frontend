@@ -1,7 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Aula } from '../models/aula';
+import { Clase } from '../models/clase';
+import { Estudiante } from '../models/estudiante';
 import { Grado } from '../models/grado';
 
 @Injectable({
@@ -15,6 +17,18 @@ export class AulaService {
 
   getAulas(): Observable<Aula[]>{
     return this.http.get<Aula[]>(this.urlEndPoint);
+  }
+
+  getEstudiantesAula(id: string): Observable<Estudiante[]>{
+    let params = new HttpParams();
+    params = params.set('id', id);
+    return this.http.get<Estudiante[]>(this.urlEndPoint+'/estudiantes', {params: params});
+  }
+
+  getClasesAula(id: string): Observable<Clase[]>{
+    let params = new HttpParams();
+    params = params.set('id', id);
+    return this.http.get<Clase[]>(this.urlEndPoint+'/clases', {params: params});
   }
 
   getAula(id:number): Observable<Aula>{

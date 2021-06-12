@@ -11,5 +11,4 @@ export class Empleado {
     celular: string;
     sexo: string;
     correo: string;
-    listaClases: Clase[];
 }

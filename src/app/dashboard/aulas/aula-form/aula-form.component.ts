@@ -25,7 +25,7 @@ export class AulaFormComponent implements OnInit {
   aula: Aula = new Aula();
   estudiantes: Estudiante[] = [];
   errores: string[] = [];
-  listaEstudiantes = [];
+  aulaEstudiantes: Estudiante[] = [];
 
   empleados: Empleado[] = [];
   grados: Grado[] = [];
@@ -34,6 +34,7 @@ export class AulaFormComponent implements OnInit {
 
   cursos: Curso[] = [];
   claseNueva: Clase = new Clase();
+  clasesAula: Clase[] = [];
 
   constructor(private aulaService: AulaService,
               private estudianteService: EstudianteService,
@@ -70,10 +71,12 @@ export class AulaFormComponent implements OnInit {
             this.aulaService.getAula(id)
                 .subscribe(response =>{
                   this.aula = response;
-                  this.aula.listaEstudiantes.forEach(e => {
-                    this.listaEstudiantes.push([e.nombres, e.apellidoPaterno, e.apellidoMaterno, e.dni, e.id]);
-                    
+                  this.aulaService.getClasesAula(id.toString()).subscribe(response => this.clasesAula = response);
+                  this.aulaService.getEstudiantesAula(id.toString()).subscribe(response => {
+                    this.aulaEstudiantes = response;
+                    console.log(this.aulaEstudiantes)
                   })
+
                 });
           }
 
@@ -102,7 +105,7 @@ export class AulaFormComponent implements OnInit {
   }
 
   agregarClase(claseForm: NgForm): void {
-
+    
     //se asigna datos a nueva clase por problemas de formulario
     let claseAgregada = new Clase();
     claseAgregada.id = this.claseNueva.id;
@@ -110,13 +113,12 @@ export class AulaFormComponent implements OnInit {
     claseAgregada.curso = this.claseNueva.curso;
     claseAgregada.aula = this.aula;
     claseAgregada.empleado = this.claseNueva.empleado;
-    console.log(claseAgregada);
     //insertamos la clase que se asignó los datos
     this.claseService.saveClase(claseAgregada).subscribe(clase => {
-      this.aula.clasesAula.push(claseAgregada);
+      this.clasesAula.push(claseAgregada);
 
-      //Se llama nuevamente al aula porque al crear la clase, el ID no se genera hasta recargar la página
-      this.aulaService.getAula(this.aula.id).subscribe(response => this.aula = response);
+      //Se llama nuevamente a las clases del aula porque al crear la clase, el ID no se genera hasta recargar la página
+      this.aulaService.getClasesAula(this.aula.id.toString()).subscribe(response => this.clasesAula = response);
       
       //limpiamos el fomulario
       claseForm.controls['nombreClase'].setValue('');
@@ -148,7 +150,7 @@ export class AulaFormComponent implements OnInit {
         clase.empleado = null;
         this.claseService.updateClase(clase).subscribe(response => {
           this.claseService.deleteClase(clase.id).subscribe(response => {
-            this.aula.clasesAula = this.aula.clasesAula.filter(c => c != clase);
+            this.clasesAula = this.clasesAula.filter(c => c != clase);
             Swal.fire(
               'Eliminado!',
               'La clase se eliminó con éxito.',
@@ -165,28 +167,23 @@ export class AulaFormComponent implements OnInit {
 
   agregarEstudiante(estudiante: Estudiante): void {
     
-    this.estudiantes = this.estudiantes.filter(e => e.id != estudiante.id);
-    //Error de bucle infinito resuelto
-    this.listaEstudiantes.push([estudiante.nombres, estudiante.apellidoPaterno, estudiante.apellidoMaterno, estudiante.dni,estudiante.id]);
     estudiante.aulaEstudiante = this.aula;
     
+    
     this.estudianteService.updateEstudiante(estudiante)
-                          .subscribe();
+                          .subscribe(response => {
+                            this.estudiantes = this.estudiantes.filter(e => e.id != estudiante.id);
+                            this.aulaEstudiantes.push(estudiante)
+                          });
   }
 
-  quitarEstudiante(estudiante: any): void {
-    let estudianteFound: Estudiante = new Estudiante();
-    
-    //Error de bucle infinito resuelto
-    this.listaEstudiantes = this.listaEstudiantes.filter(e => e[4] != estudiante[4]);
-    this.estudianteService.getEstudiante(estudiante[4]).subscribe((response) =>{
-      
-      estudianteFound = response;
-      estudianteFound.aulaEstudiante = null;
-      this.estudianteService.updateEstudiante(estudianteFound).subscribe();
-      this.estudiantes.push(estudianteFound);
-    });
-  
+  quitarEstudiante(estudiante: Estudiante): void {
+
+    this.aulaEstudiantes = this.aulaEstudiantes.filter(e => e.id != estudiante.id)
+    estudiante.aulaEstudiante = null;
+    this.estudianteService.updateEstudiante(estudiante).subscribe(response => {
+      this.estudiantes.push(estudiante);
+    })
   }
 
   

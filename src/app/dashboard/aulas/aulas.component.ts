@@ -20,7 +20,13 @@ export class AulasComponent implements OnInit {
   ngOnInit(): void {
     
     this.aulaService.getAulas()
-        .subscribe(response => this.aulas = response);
+        .subscribe(response => {
+          this.aulas = response;
+          this.aulas.forEach(e => {
+
+            this.aulaService.getEstudiantesAula(e.id.toString()).subscribe((response: Estudiante[]) => e.cantidadEstudiante = response.length)
+          })
+        });
 
     this.estudianteService.getEstudiantes()
         .subscribe(response => {
