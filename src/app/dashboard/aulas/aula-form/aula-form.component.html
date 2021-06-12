@@ -186,6 +186,19 @@
                 </select>
               </div>
             </div>
+            <div class="col-12">
+              <label for="empleado" class="ms-1">Profesor</label>
+              <div class="col-sm-12">
+                <select [(ngModel)]="claseNueva.empleado" class="form-control form-select" name="empleado">
+                  <option [ngValue]="undefined">
+                    --- Seleccionar un profesor ---
+                  </option>
+                  <option *ngFor="let empleado of empleados" [ngValue]="empleado">
+                    {{ empleado.nombres }} {{ empleado.apellidoPaterno }}
+                  </option>
+                </select>
+              </div>
+            </div>
           </div>
         </form>
       </div>

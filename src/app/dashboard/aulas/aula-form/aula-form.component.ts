@@ -4,11 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Aula } from 'src/app/models/aula';
 import { Clase } from 'src/app/models/clase';
 import { Curso } from 'src/app/models/curso';
+import { Empleado } from 'src/app/models/empleado';
 import { Estudiante } from 'src/app/models/estudiante';
 import { Grado } from 'src/app/models/grado';
 import { AulaService } from 'src/app/services/aula.service';
 import { ClaseService } from 'src/app/services/clase.service';
 import { CursoService } from 'src/app/services/curso.service';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 import { GradoService } from 'src/app/services/grado.service';
 import Swal from 'sweetalert2';
@@ -25,6 +27,7 @@ export class AulaFormComponent implements OnInit {
   errores: string[] = [];
   listaEstudiantes = [];
 
+  empleados: Empleado[] = [];
   grados: Grado[] = [];
   turnos: string[] = ['MAÑANA', 'TARDE'];
   niveles: string [] = ['PRIMARIA', 'SECUNDARIA'];
@@ -38,10 +41,13 @@ export class AulaFormComponent implements OnInit {
               private cursoService: CursoService,
               private router: Router,
               private gradoService: GradoService,
+              private empleadoService: EmpleadoService,
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.cargarAula();
+
+    this.empleadoService.getEmpleados().subscribe(response => this.empleados = response);
 
     this.gradoService.getGrados()
         .subscribe(response => this.grados = response);
@@ -103,6 +109,8 @@ export class AulaFormComponent implements OnInit {
     claseAgregada.nombre = this.claseNueva.nombre;
     claseAgregada.curso = this.claseNueva.curso;
     claseAgregada.aula = this.aula;
+    claseAgregada.empleado = this.claseNueva.empleado;
+    console.log(claseAgregada);
     //insertamos la clase que se asignó los datos
     this.claseService.saveClase(claseAgregada).subscribe(clase => {
       this.aula.clasesAula.push(claseAgregada);
@@ -137,6 +145,7 @@ export class AulaFormComponent implements OnInit {
       if (result.isConfirmed) {
         
         clase.aula = null;
+        clase.empleado = null;
         this.claseService.updateClase(clase).subscribe(response => {
           this.claseService.deleteClase(clase.id).subscribe(response => {
             this.aula.clasesAula = this.aula.clasesAula.filter(c => c != clase);

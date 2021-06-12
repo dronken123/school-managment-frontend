@@ -23,11 +23,46 @@ export class EstudiantesComponent implements OnInit {
   }
 
   
+
+  
   eliminar(estudiante: Estudiante){
-    this.estudianteService.deleteEstudiante(estudiante.id)
-        .subscribe(response => {
-          this.listaEstudiantes = this.listaEstudiantes.filter(e => e !== estudiante);
-        });
+
+    Swal.fire({
+      title: '¿Está seguro de eliminar?',
+      text: `Está apunto de eliminar al estudiante ${estudiante.nombres}`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#164e85',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(estudiante.aulaEstudiante)
+        if(estudiante.aulaEstudiante === null){
+          this.estudianteService.deleteEstudiante(estudiante.id)
+          .subscribe(response => {
+            this.listaEstudiantes = this.listaEstudiantes.filter(e => e !== estudiante);
+          });
+                Swal.fire(
+                  'Eliminado!',
+                  'El Estudiante se eliminó con éxito.',
+                  'success'
+                )
+        }else{
+
+          Swal.fire(
+            
+            'Ups..!',
+            'Estudiante que pertenece a un aula, no se puede eliminar.',
+            'error'
+          )
+          return
+        }
+
+      }
+    })
+
+
   }
 
 }
