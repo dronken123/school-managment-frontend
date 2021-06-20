@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Empleado } from '../models/empleado';
+import { EmpleadoService } from '../services/empleado.service';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,21 +10,19 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
   reporte: boolean = true;
+
+  profesorActivo: boolean = true; 
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
-  ngOnInit(): void {
-  }
-
-  
+  ngOnInit(): void {}
   
   clear(): void {
   }
 
   mostrarEstudiantes(){
-    this.router.navigate(['estudiantes'], {relativeTo: this.route});
+    this.router.navigate(['estudiantes/page/:page'], {relativeTo: this.route});
     this.reporte = false;
   }
 

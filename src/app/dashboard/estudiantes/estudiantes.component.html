@@ -67,12 +67,13 @@
                                 <td>{{estudiante.dni}}</td>
                                 <td>{{estudiante.fechaNacimiento}}</td>
                                 <td>
-                                    <button class="btn me-2"  [routerLink]="[ 'form', estudiante.id ]"><i class="far fa-edit"></i></button>
+                                    <button class="btn me-2"  [routerLink]="[ '/dashboard/estudiantes/form', estudiante.id ]"><i class="far fa-edit"></i></button>
                                     <button class="btn btn-eliminar " (click)="eliminar(estudiante)"><i class="far fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                         </tbody>
                       </table>
+                      <app-paginator [paginador]="paginador" *ngIf="paginador"></app-paginator>
             
             </div>
           </div>

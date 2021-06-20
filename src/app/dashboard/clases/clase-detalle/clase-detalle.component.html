@@ -1,0 +1,155 @@
+<div class="card">
+<div class="card-body">
+      <div class="d-flex flex-wrap justify-content-between">
+        
+        <div class="col-5">
+          <div class="d-flex">
+            <span class="ps-2 pb-1 col-10">
+              Profesor
+            </span>
+            <div class=" px-3 py-1  col-2 ">
+             
+            </div>
+          </div>
+          <div class="d-flex border">
+            <div class="py-1 text-center col-1 border-end">
+              <i class="far fa-calendar-alt text-dark"></i>
+            </div>
+            <div class=" px-3 py-1 col-10 text-dark">
+             <span>{{clase.empleado.nombres.split(' ')[0]}} {{clase.empleado.apellidoPaterno}} {{clase.empleado.apellidoMaterno}}</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-2">
+          <div class="d-flex">
+            <span class="ps-2 pb-1 col-10">
+              Turno
+            </span>
+            <div class=" px-3 py-1  col-2 ">
+             
+            </div>
+          </div>
+          <div class="d-flex border">
+            <div class=" py-1 border-end text-center col-2">
+              <i class="far fa-sun text-dark"></i>
+            </div>
+            <div class=" px-3 py-1  col-10 text-dark">
+             <span>MAÑANA</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-2">
+          <div class="d-flex">
+            <span class="ps-2 pb-1 col-10">
+              Nivel
+            </span>
+            <div class=" px-3 py-1  col-2 ">
+             
+            </div>
+          </div>
+          <div class="d-flex border">
+            <div class="py-1 border-end text-center col-2">
+              <i class="fas fa-cubes text-dark"></i>
+            </div>
+            <div class=" px-3 py-1  col-10 text-dark">
+             <span>PRIMARIA</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-2">
+          <div class="d-flex">
+            <span class="ps-2 pb-1 col-10">
+              Aula
+            </span>
+            <div class=" px-3 py-1  col-2 ">
+             
+            </div>
+          </div>
+          <div class="d-flex border">
+            <div class=" py-1 border-end text-center col-2">
+              <i class="fab fa-dashcube text-dark"></i>
+            </div>
+            <div class=" px-3 py-1 col-10 text-dark">
+             <span>P1GS1</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    <h5 class="my-3">{{clase.curso?.nombre}}</h5>
+    <hr>
+    <div class="col-12 d-flex">
+        <div class="col-4 " >
+            <p>Alumnos del aula P1GS1</p>
+            <div class="overflow-auto" style="height: 60vh;">
+            <ul class="list-group list-group-flush" *ngIf="listaEstudiantes.length > 0">
+                <div class="card">
+                  <ul class="list-group list-group-flush">
+                    <li *ngFor="let estudiante of listaEstudiantes"
+                      class="list-group-item " style="font-size: 13px;">
+                      {{estudiante.nombres}}
+                      {{ estudiante.apellidoPaterno }}
+                      {{ estudiante.apellidoMaterno }}
+                    </li>
+                  </ul>
+                </div>
+              </ul>
+            </div>
+        </div>
+        <div class="col-4">
+          <p class="px-4">Materiales <button class="btn btn-success btn-sm">Agregar</button></p>
+          <div class="ms-4" >
+            <div >
+              <span>Present Continuous - 18/07/21</span>
+              <div class="d-flex">
+                <span style="color: rgb(54, 103, 238);">Ingles_semana01.pdf</span>
+              </div>
+              <hr class="mt-0 ">
+            </div>
+            <div >
+              <span>Articles - 10/08/21</span>
+              <div class="d-flex">
+                <span style="color: rgb(54, 103, 238);">Ingles_semana02.pdf</span>
+              </div>
+              <hr class="mt-0 ">
+            </div>
+            <div >
+              <span>Modal Verb - 12/08/21</span>
+              <div class="d-flex">
+                <span style="color: rgb(54, 103, 238);">Ingles_semana03.pdf</span>
+              </div>
+              <hr class="mt-0 ">
+            </div>
+            <div >
+              <span>Present Simple - 14/08/21</span>
+              <div class="d-flex">
+                <span style="color: rgb(54, 103, 238);">Ingles_semana04.pdf</span>
+              </div>
+              <hr class="mt-0 ">
+            </div>
+          </div>
+        </div>
+        <div class="col-4">
+          <p class="px-4">Horario</p>
+          <div class="ms-4" >
+                <div *ngFor="let frecuencia of clase.frecuencias">
+                  <span>{{frecuencia.dia.nombre}}</span>
+                  <div class="d-flex">
+                    <span>{{frecuencia.horario_inicio}} </span>
+                    <span class="mx-1"> a </span>
+                    <span> {{frecuencia.horario_fin}}</span>
+                  </div>
+                  <hr class="mt-0 ">
+                </div>
+                <div class="px-4">
+                </div>
+          </div>
+    </div>
+</div>
+</div>

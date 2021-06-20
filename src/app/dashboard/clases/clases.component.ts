@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Aula } from 'src/app/models/aula';
+import { ActivatedRoute } from '@angular/router';
 import { Clase } from 'src/app/models/clase';
 import { AulaService } from 'src/app/services/aula.service';
-import { ClaseService } from 'src/app/services/clase.service';
 
 @Component({
   selector: 'app-clases',
@@ -13,11 +12,20 @@ export class ClasesComponent implements OnInit {
 
   clases: Clase[] = [];
 
-  constructor(private claseService: ClaseService) { }
+  constructor(private aulaService: AulaService,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.claseService.getClases()
+    this.cargarClases();
+  }
+
+  cargarClases(): void {
+    this.activatedRoute.params
+        .subscribe(params => {
+          let idAula: string = params['idAula'];
+          this.aulaService.getClasesAula(idAula)
         .subscribe(response => this.clases = response);
+        })
   }
 
 

@@ -6,7 +6,9 @@
       data-bs-target="#crearGradoModal">Nuevo grado</button>
       <hr>
       <div class="col-md-12 ">
-
+        <div class="alert alert-info mb-0" role="alert" *ngIf="grados.length == 0">
+          No hay GRADOS registrados. Registre GRADOS.
+        </div>
         <div class="row row-cols-1 row-cols-md-4" *ngIf="grados.length > 0">
           <div class="col" *ngFor="let grado of grados" >
             <div class="card mb-2">

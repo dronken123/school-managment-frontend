@@ -16,6 +16,10 @@ export class ClaseService {
     return this.http.get<Clase[]>(this.urlEndPoint);
   }
 
+  getClase(id: number): Observable<Clase>{
+    return this.http.get<Clase>(`${this.urlEndPoint}/${id}`);
+  }
+
   saveClase(clase: Clase): Observable<Clase>{
     return this.http.post<Clase>(this.urlEndPoint+'/crear', clase);
   }

@@ -1,52 +1,53 @@
 .btn{
-    background-color: #164e85 ;
-    border-color: #164e85 ;
-    color: #fff;
-  }
+  background-color: #164e85 ;
+  border-color: #164e85 ;
+  color: #fff;
+}
 .btn:hover{
-    background-color: #124374 ;
-    border-color: #124374 ;
+  background-color: #124374 ;
+  border-color: #124374 ;
 }
 
 .btn-eliminar {
-  background-color: #fb536e;
-  border-color: #fb536e;
+background-color: #fb536e;
+border-color: #fb536e;
 }
 
 .btn-eliminar:hover {
-  background-color: #dd2f4c;
-  border-color: #dd2f4c;
+background-color: #dd2f4c;
+border-color: #dd2f4c;
 }
 
 
 * {
-  box-sizing: border-box;
+box-sizing: border-box;
 }
 
 table{
-  border-collapse: collapse;
-  box-shadow: 0 5px 10px #e8e4e4;
-  background-color: white;
-  text-align: left;
-  overflow: hidden;
+border-collapse: collapse;
+box-shadow: 0 5px 10px #e8e4e4;
+background-color: white;
+text-align: left;
+overflow: hidden;
 }
 
 thead {
-  box-shadow: 0 5px 10px #e8e4e4;
+box-shadow: 0 5px 10px #e8e4e4;
 }
 
 th {
-  padding: 1rem 1.5rem;
-  
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  font-weight: 900;
+padding: 0.9rem 1.1rem;
+text-transform: uppercase;
+font-size: 0.9rem;
+font-weight: 700;
 }
 
 td{
-  padding: 1rem 1.5rem;
+padding: 0.9rem 1.1rem;
+font-size: 0.9rem;
+font-weight: 700;
 }
 
 tr:nth-child(even){
-  background-color: #f2f5fc;
+background-color: #f2f5fc;
 }

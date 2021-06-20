@@ -6,7 +6,9 @@
         data-bs-target="#crearCursoModal">Nuevo curso</button>
         <hr>
         <div class="col-md-12">
-
+          <div class="alert alert-info mb-0" role="alert" *ngIf="cursos.length == 0">
+            No hay CURSOS registrados. Registre CURSOS.
+          </div>
           <div class="row row-cols-1 row-cols-md-4" *ngIf="cursos.length > 0">
             <div class="col" *ngFor="let curso of cursos" >
               <div class="card mb-2">

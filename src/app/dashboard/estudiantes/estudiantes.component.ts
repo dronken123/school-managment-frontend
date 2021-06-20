@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Estudiante } from '../../models/estudiante';
 import { EstudianteService } from '../../services/estudiante.service';
 import Swal from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-estudiantes',
@@ -12,14 +13,31 @@ export class EstudiantesComponent implements OnInit {
 
   listaEstudiantes: Estudiante[] = [];
 
-  constructor(private estudianteService: EstudianteService) { }
+  paginador: any;
+
+  constructor(private estudianteService: EstudianteService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.estudianteService.getEstudiantes()
-        .subscribe(response => {
-          this.listaEstudiantes = response;
-          console.log(this.listaEstudiantes)
-        });
+
+    this.activatedRoute.paramMap
+    .subscribe(params => {
+
+      let page: number = +params.get('page');
+
+      if(!page) {page = 0}
+
+      this.estudianteService.getEstudiantesPage(page)
+          .subscribe(response => {
+            this.listaEstudiantes = response.content as Estudiante[];
+            this.paginador = response;
+          }) ;
+    });
+
+    // this.estudianteService.getEstudiantes()
+    //     .subscribe(response => {
+    //       this.listaEstudiantes = response;
+    //       console.log(this.listaEstudiantes)
+    //     });
   }
 
   

@@ -64,7 +64,7 @@ export class FormComponent implements OnInit {
   actualizar(){
     this.estudianteService.updateEstudiante(this.estudiante)
         .subscribe(response => {
-          this.router.navigate(['/dashboard/estudiantes']);
+          this.router.navigate(['/dashboard/estudiantes/page/0']);
           Swal.fire(
             'Estudiante actualizado',
             'El estudiante se ha actualizado con éxito',

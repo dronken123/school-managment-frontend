@@ -1,6 +1,9 @@
+import { Usuario } from "../auth/models/usuario";
 import { Apoderado } from "./apoderado";
 import { Aula } from "./aula";
 import { Grado } from "./grado";
+import { Nivel } from "./nivel";
+import { Turno } from "./turno";
 
 export class Estudiante {
     id: number;
@@ -13,7 +16,10 @@ export class Estudiante {
     celular: string;
     sexo: string;
     correo: string;
+    usuario: Usuario;
     apoderado: Apoderado;
     aulaEstudiante: Aula;
     grado: Grado;
+    turno: Turno;
+    nivel: Nivel;
 }

@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { Clase } from '../models/clase';
 import { Empleado } from '../models/empleado';
 
 @Injectable({
@@ -21,6 +22,19 @@ export class EmpleadoService {
                    return response;
                  })
                )
+  }
+
+  getEmpleadoByDni(dni: string): Observable<Empleado> {
+    let params = new HttpParams();
+    params = params.set('dni', dni);
+    return this.http.get<Empleado>(`${this.urlEndPoint}/buscarDni`, {params: params});
+  }
+
+  getClasesEmpleado(id: string): Observable<Clase[]>{
+    let params = new HttpParams();
+    params = params.set('id', id);
+    return this.
+    http.get<Clase[]>(this.urlEndPoint+'/clases', {params: params})
   }
 
   saveEmpleado(empleado: Empleado): Observable<Empleado>{

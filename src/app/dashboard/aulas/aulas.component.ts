@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Aula } from 'src/app/models/aula';
 import { Estudiante } from 'src/app/models/estudiante';
 import { AulaService } from 'src/app/services/aula.service';
@@ -15,7 +16,9 @@ export class AulasComponent implements OnInit {
   aulas: Aula[] = [];
   estudiantes: Estudiante[] = [];
 
-  constructor(private aulaService: AulaService, private estudianteService: EstudianteService) { }
+  constructor(private aulaService: AulaService,
+             private estudianteService: EstudianteService,
+             private router: Router) { }
 
   ngOnInit(): void {
     
@@ -33,5 +36,4 @@ export class AulasComponent implements OnInit {
           this.estudiantes = response.filter((e: Estudiante) => e.aulaEstudiante == null);
         });
   }
-
 }

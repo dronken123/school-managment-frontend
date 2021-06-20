@@ -1,10 +1,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
 
 .container-dashboard{
   min-height: calc(100vh - 53px);
-  color: #164E85;
 }
 
 
@@ -24,7 +24,14 @@
   min-height: calc(100vh - 53px);
   width: calc(100% - 220px);
   left: 220px;
+  font-family: 'Poppins', sans-serif;
+  color: #41464b;
+}
+
+.dashboard-content{
   font-family: 'Roboto', sans-serif;
+  
+  color: #164E85;
 }
 
 .admin {

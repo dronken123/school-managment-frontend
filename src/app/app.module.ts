@@ -20,14 +20,19 @@ import { LineChartComponent } from './dashboard/charts/line-chart/line-chart.com
 import { PieChartComponent } from './dashboard/charts/pie-chart/pie-chart.component';
 import { EmpleadosComponent } from './dashboard/empleados/empleados.component';
 import { EmpleadoFormComponent } from './dashboard/empleados/empleado-form/empleado-form.component';
+import { ClaseDetalleComponent } from './dashboard/clases/clase-detalle/clase-detalle.component';
+import { LoginComponent } from './auth/login.component';
+import { PaginatorComponent } from './shared/paginator/paginator.component';
 
 export const routes: Routes = [
-  { path: '', component: DashboardComponent },
+  { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, children: [
-    { path: 'estudiantes', component: EstudiantesComponent },
+    // { path: 'estudiantes/page/:page', component: EstudiantesComponent },
+    { path: 'estudiantes/page/:page', component: EstudiantesComponent },
     { path: 'estudiantes/form', component: FormComponent },
     { path: 'estudiantes/form/:id', component: FormComponent },
-    { path: 'clases', component: ClasesComponent},
+    { path: 'aulas/:idAula/clases', component: ClasesComponent},
+    { path: 'aulas/:idAula/clases/:idClase', component: ClaseDetalleComponent},
     { path: 'aulas', component: AulasComponent},
     { path: 'aulas/form', component: AulaFormComponent},
     { path: 'aulas/form/:id', component: AulaFormComponent},
@@ -57,7 +62,10 @@ export const routes: Routes = [
     LineChartComponent,
     PieChartComponent,
     EmpleadosComponent,
-    EmpleadoFormComponent
+    EmpleadoFormComponent,
+    ClaseDetalleComponent,
+    LoginComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,

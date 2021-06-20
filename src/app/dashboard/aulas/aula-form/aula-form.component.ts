@@ -4,15 +4,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Aula } from 'src/app/models/aula';
 import { Clase } from 'src/app/models/clase';
 import { Curso } from 'src/app/models/curso';
+import { DiaSemana } from 'src/app/models/dia-semana';
 import { Empleado } from 'src/app/models/empleado';
 import { Estudiante } from 'src/app/models/estudiante';
+import { Frecuencia } from 'src/app/models/frecuencia';
 import { Grado } from 'src/app/models/grado';
+import { Nivel } from 'src/app/models/nivel';
+import { Turno } from 'src/app/models/turno';
 import { AulaService } from 'src/app/services/aula.service';
 import { ClaseService } from 'src/app/services/clase.service';
 import { CursoService } from 'src/app/services/curso.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 import { GradoService } from 'src/app/services/grado.service';
+import { MatriculaService } from 'src/app/services/matricula-service.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -29,17 +34,22 @@ export class AulaFormComponent implements OnInit {
 
   empleados: Empleado[] = [];
   grados: Grado[] = [];
-  turnos: string[] = ['MAÑANA', 'TARDE'];
-  niveles: string [] = ['PRIMARIA', 'SECUNDARIA'];
+  turnos: Turno[] = [];
+  niveles: Nivel[] = [];
 
   cursos: Curso[] = [];
   claseNueva: Clase = new Clase();
   clasesAula: Clase[] = [];
+  frecuencias: Frecuencia[] = [];
+
+  dias: DiaSemana[] = [];
+  inicio_horas: string[] = ['7:00 AM','8:00 AM','9:00 AM','10:00 AM','11:00 AM','12:00 AM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM', '7:00 PM'];
 
   constructor(private aulaService: AulaService,
               private estudianteService: EstudianteService,
               private claseService: ClaseService,
               private cursoService: CursoService,
+              private matriculaService: MatriculaService,
               private router: Router,
               private gradoService: GradoService,
               private empleadoService: EmpleadoService,
@@ -54,6 +64,12 @@ export class AulaFormComponent implements OnInit {
         .subscribe(response => this.grados = response);
 
     this.cursoService.getCursos().subscribe(response => this.cursos = response);
+
+    this.matriculaService.getNiveles().subscribe(response => this.niveles = response);
+
+    this.matriculaService.getTurnos().subscribe(response => this.turnos = response); 
+
+    this.matriculaService.getDias().subscribe(response => this.dias = response);
 
     this.estudianteService.getEstudiantes()
         .subscribe((response: Estudiante[]) => {
@@ -70,11 +86,19 @@ export class AulaFormComponent implements OnInit {
           if(id){
             this.aulaService.getAula(id)
                 .subscribe(response =>{
-                  this.aula = response;
-                  this.aulaService.getClasesAula(id.toString()).subscribe(response => this.clasesAula = response);
+                  this.aula = response; 
+
+                  if(this.frecuencias.length == 0){
+                    let frecuencia: Frecuencia = new Frecuencia();
+                    this.frecuencias.push(frecuencia);
+                  }
+
+                  this.aulaService.getClasesAula(id.toString()).subscribe(response => {
+                    this.clasesAula = response;
+                    console.log(this.clasesAula);
+                  });
                   this.aulaService.getEstudiantesAula(id.toString()).subscribe(response => {
                     this.aulaEstudiantes = response;
-                    console.log(this.aulaEstudiantes)
                   })
 
                 });
@@ -101,6 +125,12 @@ export class AulaFormComponent implements OnInit {
     this.aulaService.updateAula(this.aula)
         .subscribe(response => {
           this.router.navigate(['/dashboard/aulas']);
+
+          Swal.fire(
+            'Actualizado!',
+            'El aula se actualizó con éxito.',
+            'success'
+          )
         })
   }
 
@@ -109,10 +139,10 @@ export class AulaFormComponent implements OnInit {
     //se asigna datos a nueva clase por problemas de formulario
     let claseAgregada = new Clase();
     claseAgregada.id = this.claseNueva.id;
-    claseAgregada.nombre = this.claseNueva.nombre;
     claseAgregada.curso = this.claseNueva.curso;
     claseAgregada.aula = this.aula;
     claseAgregada.empleado = this.claseNueva.empleado;
+    claseAgregada.frecuencias = this.frecuencias;
     //insertamos la clase que se asignó los datos
     this.claseService.saveClase(claseAgregada).subscribe(clase => {
       this.clasesAula.push(claseAgregada);
@@ -121,8 +151,12 @@ export class AulaFormComponent implements OnInit {
       this.aulaService.getClasesAula(this.aula.id.toString()).subscribe(response => this.clasesAula = response);
       
       //limpiamos el fomulario
-      claseForm.controls['nombreClase'].setValue('');
-      claseForm.controls['cursoClase'].setValue(undefined);
+      let frecuencia: Frecuencia = new Frecuencia();
+      this.frecuencias = [];
+      this.frecuencias.push(frecuencia);
+      this.claseNueva.empleado = undefined;
+      this.claseNueva.curso = undefined;
+      // claseForm.controls['cursoClase'].setValue(undefined);
       Swal.fire({
         position: 'top-end',
         icon: 'success',
@@ -137,7 +171,7 @@ export class AulaFormComponent implements OnInit {
 
     Swal.fire({
       title: '¿Está seguro de eliminar?',
-      text: `Está apunto de eliminar la clase ${clase.nombre}`,
+      text: `Está apunto de eliminar la clase ${clase.curso.nombre}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#164e85',
@@ -186,8 +220,30 @@ export class AulaFormComponent implements OnInit {
     })
   }
 
+  agregarFrecuencia(): void {
+    let frecuencia: Frecuencia = new Frecuencia();
+    this.frecuencias.push(frecuencia);
+  }
+
+  quitarFrecuencia(frecuencia: Frecuencia): void {
+    const index = this.frecuencias.indexOf(frecuencia);
+    if(index > -1){
+      this.frecuencias.splice(index, 1);
+    }
+  }
+
   
   compararGrado(o1: Grado, o2:Grado): boolean{
+    if(o1 === undefined && o2 === undefined) return true;
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false: o1.id == o2.id;
+  }
+
+  compararNivel(o1: Nivel, o2:Nivel): boolean{
+    if(o1 === undefined && o2 === undefined) return true;
+    return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false: o1.id == o2.id;
+  }
+
+  compararTurno(o1: Turno, o2:Turno): boolean{
     if(o1 === undefined && o2 === undefined) return true;
     return o1 === null || o2 === null || o1 === undefined || o2 === undefined ? false: o1.id == o2.id;
   }

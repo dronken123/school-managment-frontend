@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -21,6 +21,21 @@ export class EstudianteService {
                    return response;
                  })
                )
+  }
+
+  getEstudiantesPage(page: number): Observable<any> {
+    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
+      map((response: any) => {
+        response.content as Estudiante[];
+        return response;
+      })
+    );
+  }
+
+  getEstudianteByDni(dni: string): Observable<Estudiante> {
+    let params = new HttpParams();
+    params = params.set('dni', dni);
+    return this.http.get<Estudiante>(`${this.urlEndPoint}/buscarDni`, {params: params});
   }
 
   saveEstudiante(estudiante: Estudiante): Observable<Estudiante>{

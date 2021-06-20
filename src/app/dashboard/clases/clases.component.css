@@ -1,13 +1,17 @@
-.btn{
+.btn-primary{
     background-color: #164e85 ;
     border-color: #164e85 ;
     color: #fff;
   }
-.btn:hover{
+.btn-primary:hover{
     background-color: #124374 ;
     border-color: #124374 ;
 }
 
 .card-header {
   background-color: #164e85;
+}
+
+span {
+  font-size: 14px;
 }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TokenService } from 'src/app/services/token.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private tokenService: TokenService, private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  get isAuthenticated(): boolean {
+    return this.tokenService.isAuthenticated();
   }
 
+  onLogout(): void {
+    window.sessionStorage.clear();
+    this.router.navigate(['/'])
+    Swal.fire({
+      position: 'top-end',
+      icon: 'info',
+      title: 'Ha cerrado sesión con éxito',
+      showConfirmButton: false,
+      timer: 2000
+    })
+  }
 }
