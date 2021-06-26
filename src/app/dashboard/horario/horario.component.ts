@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Aula } from 'src/app/models/aula';
 import { Clase } from 'src/app/models/clase';
 import { DiaSemana } from 'src/app/models/dia-semana';
 import { Frecuencia } from 'src/app/models/frecuencia';
@@ -7,51 +8,52 @@ import { AulaService } from 'src/app/services/aula.service';
 import { MatriculaService } from 'src/app/services/matricula-service.service';
 
 @Component({
-  selector: 'app-clases',
-  templateUrl: './clases.component.html',
-  styleUrls: ['./clases.component.css']
+  selector: 'app-horario',
+  templateUrl: './horario.component.html',
+  styleUrls: ['./horario.component.css']
 })
-export class ClasesComponent implements OnInit {
+export class HorarioComponent implements OnInit {
 
+  aula: Aula = new Aula();
   clases: Clase[] = [];
-  diasSemana: DiaSemana[] = [];
-
   frecuenciasLunes: Frecuencia[] = [];
+  diasSemana: DiaSemana[] = [];
   frecuenciasMartes: Frecuencia[] = [];
   frecuenciasMiercoles: Frecuencia[] = [];
   frecuenciasJueves: Frecuencia[] = [];
   frecuenciasViernes: Frecuencia[] = [];
 
-  constructor(private aulaService: AulaService,
-              private activatedRoute: ActivatedRoute,
-              private matriculaService: MatriculaService) { }
+  constructor(private activatedRoute: ActivatedRoute,
+                      private aulaService: AulaService,
+                      private matriculaService: MatriculaService,
+                      private router: Router) { }
 
   ngOnInit(): void {
     this.cargarClases();
-    this.matriculaService.getDias().subscribe(response => this.diasSemana = response);
+    
   }
 
   cargarClases(): void {
     this.activatedRoute.params
         .subscribe(params => {
           let idAula: string = params['idAula'];
+          this.aulaService.getAula(+idAula).subscribe(response => this.aula = response);
           this.aulaService.getClasesAula(idAula)
         .subscribe(response => {
           this.clases = response;
-          this.cargarClasexDia();
+          this.matriculaService.getDias().subscribe(response => {
+            this.diasSemana = response;
+            this.cargarClasexDia();
+          } );
+          
         });
         })
   }
 
+
   cargarClasexDia(): void {
     this.clases.forEach(c => {
-      
-      // frecuenciasLunes = c.frecuencias.filter(f => {
-      //   if(f.dia.id == this.diasSemana[0].id){
-      //     return f;
-      //   }
-        
-      // })
+
       c.frecuencias.forEach(f => {
         if(f.dia.id === this.diasSemana[0].id){
           this.frecuenciasLunes.push(f);
@@ -77,8 +79,5 @@ export class ClasesComponent implements OnInit {
     console.log(this.frecuenciasJueves)
     console.log(this.frecuenciasViernes)
   }
-
-
-
 
 }

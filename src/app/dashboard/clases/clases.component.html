@@ -15,30 +15,14 @@
               <ul class="list-group px-2">
                 <li class="list-group-item list-group-item-primary"><span>{{ clase.curso.nombre }}</span></li>
                 <li class="list-group-item list-group-item-light"><span>Aula: </span><span>{{ clase.aula?.nombre }}{{ clase.aula?.seccion }}</span></li>
-                <li class="list-group-item list-group-item-light" *ngIf="clase.empleado"><span>Profesor: </span><span>{{ clase.empleado?.nombres }} {{ clase.empleado?.apellidoPaterno }}</span></li>
-                <li class="list-group-item list-group-item-light" *ngIf="!clase.empleado"><span>Profesor: </span> <button class="btn btn-success btn-sm">Asignar Profesor</button></li>
+                <li class="list-group-item list-group-item-light" *ngIf="clase.empleado"><span>Profesor(a): </span><span>{{ clase.empleado?.nombres }} {{ clase.empleado?.apellidoPaterno }}</span></li>
+                <li class="list-group-item list-group-item-light" *ngIf="!clase.empleado"><span>Profesor(a): </span> <button class="btn btn-success btn-sm">Asignar Profesor</button></li>
                 <a [routerLink]="[clase.id]" style="text-decoration: none; color: inherit;">
                   <li class="list-group-item list-group-item-success text-center">Ver clase</li>
                 </a>
               </ul>
             </div>
           </ul>
-          <!-- <ul class="list-group list-group-flush">
-            <div class="row p-3">
-              <div class="col-md-12">
-                <span class="text-dark">Curso: </span>{{ clase.nombre }}
-              </div>
-              <div class="col-md-12">
-                <span class="text-dark">Aula: </span>{{ clase.aula?.nombre }} {{ clase.aula?.seccion }}
-              </div>
-              <div class="col-md-12" *ngIf="clase.empleado">
-                <span class="text-dark">Profesor: </span>{{ clase.empleado?.nombres }} {{ clase.empleado?.apellidoPaterno }} {{ clase.empleado?.apellidoMaterno }}
-              </div>
-              <div class="col-md-12" *ngIf="!clase.empleado">
-                <span class="text-dark">Profesor: </span> <button class="btn btn-success btn-sm">Asignar Profesor</button>
-              </div>
-            </div>
-          </ul> -->
         </div>
       </div>
     </div>

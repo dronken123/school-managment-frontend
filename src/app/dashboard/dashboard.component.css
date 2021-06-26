@@ -1,6 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
 
 .container-dashboard{
@@ -40,14 +40,14 @@
   font-weight: 500;
 }
 
-ul li a{
+.ul .li a{
   font-weight: 400;
   padding-left: 1.4rem;
   display: block;
   font-size: 1rem;
 }
 
-ul li:hover, ul li a:hover {
+.ul .li:hover, .ul .li a:hover {
   background: #043769;
 
 }

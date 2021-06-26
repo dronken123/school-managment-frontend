@@ -73,6 +73,7 @@ export class AulaFormComponent implements OnInit {
 
     this.estudianteService.getEstudiantes()
         .subscribe((response: Estudiante[]) => {
+          
           this.estudiantes = response.filter((e: Estudiante) => e.aulaEstudiante == null);
         });
     
@@ -99,6 +100,7 @@ export class AulaFormComponent implements OnInit {
                   });
                   this.aulaService.getEstudiantesAula(id.toString()).subscribe(response => {
                     this.aulaEstudiantes = response;
+                    console.log(this.aulaEstudiantes)
                   })
 
                 });

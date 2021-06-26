@@ -1,0 +1,48 @@
+
+<h5>Marcar asistencia</h5>
+<h4 class="card-title">
+  <a (click)="regresar()" class="btn btn-light">&laquo; regresar</a>
+</h4>
+<hr>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            Nombres y Apellidos
+          </th>
+          <th>
+            Asistencia
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let estudiante of estudiantes">
+          <td>{{estudiante.nombres}} {{ estudiante.apellidoPaterno }} {{ estudiante.apellidoMaterno }}</td>
+          <td>
+            <div class="d-flex">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" (click)="asistencia(estudiante,'PUNTUAL')"  name="asistencia{{estudiante.id}}falta" id="asistencia{{estudiante.id}}puntual">
+                <label class="form-check-label">
+                  PUNTUAL
+                </label>
+              </div>
+              <div class="form-check mx-3">
+                <input class="form-check-input" type="radio" (click)="asistencia(estudiante,'TARDANZA')"  name="asistencia{{estudiante.id}}falta" id="asistencia{{estudiante.id}}tarde" checked>
+                <label class="form-check-label">
+                  TARDANZA
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" (click)="asistencia(estudiante,'FALTA')"  name="asistencia{{estudiante.id}}falta" id="asistencia{{estudiante.id}}falta" checked>
+                <label class="form-check-label" >
+                  FALTA
+                </label>
+              </div>
+            </div>
+            
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="btn btn-primary" (click)="cargarAsistencia()" >Guardar Asistencia</button>

@@ -23,6 +23,9 @@ import { EmpleadoFormComponent } from './dashboard/empleados/empleado-form/emple
 import { ClaseDetalleComponent } from './dashboard/clases/clase-detalle/clase-detalle.component';
 import { LoginComponent } from './auth/login.component';
 import { PaginatorComponent } from './shared/paginator/paginator.component';
+import { AsistenciasComponent } from './dashboard/clases/asistencias/asistencias.component';
+import { HorarioComponent } from './dashboard/horario/horario.component';
+import { NotasComponent } from './dashboard/notas/notas.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -32,7 +35,9 @@ export const routes: Routes = [
     { path: 'estudiantes/form', component: FormComponent },
     { path: 'estudiantes/form/:id', component: FormComponent },
     { path: 'aulas/:idAula/clases', component: ClasesComponent},
+    { path: 'aulas/:idAula/clases/horario', component: HorarioComponent},
     { path: 'aulas/:idAula/clases/:idClase', component: ClaseDetalleComponent},
+    { path: 'aulas/:idAula/clases/:idClase/asistencias', component: AsistenciasComponent},
     { path: 'aulas', component: AulasComponent},
     { path: 'aulas/form', component: AulaFormComponent},
     { path: 'aulas/form/:id', component: AulaFormComponent},
@@ -65,7 +70,10 @@ export const routes: Routes = [
     EmpleadoFormComponent,
     ClaseDetalleComponent,
     LoginComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    AsistenciasComponent,
+    HorarioComponent,
+    NotasComponent
   ],
   imports: [
     BrowserModule,

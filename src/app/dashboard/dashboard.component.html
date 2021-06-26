@@ -3,14 +3,14 @@
 
       <div id="sidebar">
         <div  >
-          <ul class="nav flex-column hover px-0 mx-0">
-            <li class="logo px-4 py-3 d-flex flex-row" (click)="mostrarDashboard()" >
+          <ul class="nav flex-column hover px-0 mx-0 ul">
+            <li class="logo px-4 py-3 d-flex flex-row li" (click)="mostrarDashboard()" >
               <div class="col-12">
                 <i class="fas fa-atom"></i>
                 <span style="font-weight: 500; margin-left: 10px;">School Managment</span>
               </div>
             </li>
-            <li class="nav-item px-4 py-3 mt-3 d-flex flex-row" (click)="mostrarDashboard()" style="cursor: pointer;">
+            <li class="nav-item px-4 py-3 mt-3 d-flex flex-row li" (click)="mostrarDashboard()" style="cursor: pointer;">
 
               <div class="col-9 ">
                 <span class="">Dashboard</span>
@@ -19,7 +19,7 @@
                 <span class="me-4"><i class="fas fa-tachometer-alt"></i></span>
               </div>
             </li>
-            <li class="nav-item px-4 py-3 d-flex flex-row" (click)="mostrarEstudiantes()" style="cursor: pointer;">
+            <li class="nav-item px-4 py-3 d-flex flex-row li" (click)="mostrarEstudiantes()" style="cursor: pointer;">
 
               <div class="col-9 ">
                 <span class="col-sm-8">Estudiantes</span>
@@ -28,7 +28,7 @@
                 <span class="me-4 col-sm-4"><i class="fas fa-child"></i></span>
               </div>
             </li>
-            <li class="nav-item px-4 py-3 d-flex flex-row" (click)="mostrarEmpleados()" style="cursor: pointer;">
+            <li class="nav-item px-4 py-3 d-flex flex-row li" (click)="mostrarEmpleados()" style="cursor: pointer;">
 
               <div class="col-9">
                 <span class="">Empleados</span>
@@ -37,7 +37,7 @@
                 <span class="me-4"><i class="fas fa-chalkboard-teacher"></i></span>
               </div>
             </li>
-            <li class="nav-item px-4 py-3 d-flex flex-row" (click)="mostrarAulas()" style="cursor: pointer;">
+            <li class="nav-item px-4 py-3 d-flex flex-row li" (click)="mostrarAulas()" style="cursor: pointer;">
               <div class="col-9">
                 <span class="">Aulas</span>
               </div>
@@ -45,7 +45,7 @@
                 <span class="me-4"><i class="fas fa-school"></i></span>
               </div>
             </li>
-            <li class="nav-item px-4 py-3 d-flex flex-row" (click)="mostrarCursos()" style="cursor: pointer;">
+            <li class="nav-item px-4 py-3 d-flex flex-row li" (click)="mostrarCursos()" style="cursor: pointer;">
               <div class="col-9">
                 <span >Cursos</span>
               </div>
@@ -53,7 +53,7 @@
                 <span class="me-4"><i class="fas fa-book"></i></span>
               </div>
             </li>
-            <li class="nav-item px-4 py-3 d-flex flex-row" (click)="mostrarGrados()" style="cursor: pointer;">
+            <li class="nav-item px-4 py-3 d-flex flex-row li" (click)="mostrarGrados()" style="cursor: pointer;">
 
               <div class="col-9">
                 <span class="">Grados</span>
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div id="dashboard">
-        <div *ngIf="reporte" class="dashboard-content">
+        <div *ngIf="reporte && adminActivo && !profesorActivo" class="dashboard-content">
           <div class="admin">
             Admin Dashboard 
           </div>
@@ -130,7 +130,7 @@
         </div>
   
         
-      <div *ngIf="!profesorActivo" class="p-4">
+      <div *ngIf="profesorActivo" class="p-4">
 
         <div class="card mt-2">
   
@@ -138,112 +138,16 @@
             <h5>Clases asignadas</h5>
           <hr>
             <div class="row row-cols-1 row-cols-md-3">
-              <div class="col">
+              <div class="col" *ngFor="let clase of clases">
                 <div>
                   <ul class="list-group list-group-flush">
                     <div class="row p-3">
                       <ul class="list-group px-2">
-                        <li class="list-group-item list-group-item-primary"><span>Matemática</span></li>
-                        <li class="list-group-item list-group-item-light"><span>Aula: </span><span>P1GS1</span></li>
-                        <li class="list-group-item list-group-item-light" ><span>Profesor: </span><span>ANDERSON BENGOLEA</span></li>
+                        <li class="list-group-item list-group-item-primary"><span>{{clase.curso.nombre}}</span></li>
+                        <li class="list-group-item list-group-item-light"><span>Aula: </span><span>{{clase.aula.nombre}}{{clase.aula.seccion}}</span></li>
+                        <li class="list-group-item list-group-item-light" ><span>Profesor: </span><span>{{clase.empleado.nombres}} {{clase.empleado.apellidoPaterno}}</span></li>
                         <a  style="text-decoration: none; color: inherit;">
-                          <li class="list-group-item list-group-item-success text-center">Ver clase</li>
-                        </a>
-                      </ul>
-                    </div>
-                  </ul>
-                </div>
-              </div>
-              <div class="col">
-                <div>
-                  <ul class="list-group list-group-flush">
-                    <div class="row p-3">
-                      <ul class="list-group px-2">
-                        <li class="list-group-item list-group-item-primary"><span>Matemática</span></li>
-                        <li class="list-group-item list-group-item-light"><span>Aula: </span><span>P2GS1</span></li>
-                        <li class="list-group-item list-group-item-light" ><span>Profesor: </span><span>ANDERSON BENGOLEA</span></li>
-                        <a  style="text-decoration: none; color: inherit;">
-                          <li class="list-group-item list-group-item-success text-center">Ver clase</li>
-                        </a>
-                      </ul>
-                    </div>
-                  </ul>
-                </div>
-              </div>
-              <div class="col">
-                <div>
-                  <ul class="list-group list-group-flush">
-                    <div class="row p-3">
-                      <ul class="list-group px-2">
-                        <li class="list-group-item list-group-item-primary"><span>Matemática</span></li>
-                        <li class="list-group-item list-group-item-light"><span>Aula: </span><span>P3GS1</span></li>
-                        <li class="list-group-item list-group-item-light" ><span>Profesor: </span><span>ANDERSON BENGOLEA</span></li>
-                        <a  style="text-decoration: none; color: inherit;">
-                          <li class="list-group-item list-group-item-success text-center">Ver clase</li>
-                        </a>
-                      </ul>
-                    </div>
-                  </ul>
-                </div>
-              </div>
-              <div class="col">
-                <div>
-                  <ul class="list-group list-group-flush">
-                    <div class="row p-3">
-                      <ul class="list-group px-2">
-                        <li class="list-group-item list-group-item-primary"><span>Matemática</span></li>
-                        <li class="list-group-item list-group-item-light"><span>Aula: </span><span>P4GS1</span></li>
-                        <li class="list-group-item list-group-item-light" ><span>Profesor: </span><span>ANDERSON BENGOLEA</span></li>
-                        <a  style="text-decoration: none; color: inherit;">
-                          <li class="list-group-item list-group-item-success text-center">Ver clase</li>
-                        </a>
-                      </ul>
-                    </div>
-                  </ul>
-                </div>
-              </div>
-              <div class="col">
-                <div>
-                  <ul class="list-group list-group-flush">
-                    <div class="row p-3">
-                      <ul class="list-group px-2">
-                        <li class="list-group-item list-group-item-primary"><span>Matemática</span></li>
-                        <li class="list-group-item list-group-item-light"><span>Aula: </span><span>P5GS1</span></li>
-                        <li class="list-group-item list-group-item-light" ><span>Profesor: </span><span>ANDERSON BENGOLEA</span></li>
-                        <a  style="text-decoration: none; color: inherit;">
-                          <li class="list-group-item list-group-item-success text-center">Ver clase</li>
-                        </a>
-                      </ul>
-                    </div>
-                  </ul>
-                </div>
-              </div>
-              <div class="col">
-                <div>
-                  <ul class="list-group list-group-flush">
-                    <div class="row p-3">
-                      <ul class="list-group px-2">
-                        <li class="list-group-item list-group-item-primary"><span>Matemática</span></li>
-                        <li class="list-group-item list-group-item-light"><span>Aula: </span><span>P6GS1</span></li>
-                        <li class="list-group-item list-group-item-light" ><span>Profesor: </span><span>ANDERSON BENGOLEA</span></li>
-                        <a  style="text-decoration: none; color: inherit;">
-                          <li class="list-group-item list-group-item-success text-center">Ver clase</li>
-                        </a>
-                      </ul>
-                    </div>
-                  </ul>
-                </div>
-              </div>
-              <div class="col">
-                <div>
-                  <ul class="list-group list-group-flush">
-                    <div class="row p-3">
-                      <ul class="list-group px-2">
-                        <li class="list-group-item list-group-item-primary"><span>Matemática</span></li>
-                        <li class="list-group-item list-group-item-light"><span>Aula: </span><span>P2GS2</span></li>
-                        <li class="list-group-item list-group-item-light" ><span>Profesor: </span><span>ANDERSON BENGOLEA</span></li>
-                        <a  style="text-decoration: none; color: inherit;">
-                          <li class="list-group-item list-group-item-success text-center">Ver clase</li>
+                          <li class="list-group-item list-group-item-success text-center" (click)="irClase(clase)" style="cursor: pointer;">Ver clase</li>
                         </a>
                       </ul>
                     </div>
@@ -257,7 +161,7 @@
       </div>
         
         <div *ngIf="!reporte" class="px-4 pt-3 dashboard pb-5">
-          <router-outlet></router-outlet>
+          <router-outlet (parentFunction)="parentFunction($event)"></router-outlet>
         </div>
       </div>
 

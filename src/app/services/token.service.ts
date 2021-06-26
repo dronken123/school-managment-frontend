@@ -65,6 +65,22 @@ export class TokenService {
     return true;
   }
 
+  public isEstudiante(): boolean {
+
+    if(!this.isAuthenticated()) return false;
+
+    const token = this.getToken();
+    const payload = token.split('.')[1];
+    const payloadDecoded = JSON.parse(atob(payload));
+    const roles = payloadDecoded.roles;
+
+    if(roles.indexOf('ROLE_ESTUDIANTE') < 0){
+      return false;
+    }
+
+    return true;
+  }
+
 
   public isAuthenticated(): boolean {
     if(this.getToken()){
