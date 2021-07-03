@@ -1,1 +1,55 @@
-<p>notas works!</p>
+<h5>Registrar notas</h5>
+<h4 class="card-title">
+  <a class="btn btn-light">&laquo; regresar</a>
+</h4>
+<hr>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>NOMBRES Y APELLIDOS</th>
+            <th>BIMESTRE 1</th>
+            <th>BIMESTRE 2</th>
+            <th>BIMESTRE 3</th>
+            <th>BIMESTRE 4</th>
+            <th>PROMEDIO</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let estudiante of estudiantes">
+            <td >
+                {{estudiante.nombres}} {{estudiante.apellidoPaterno}} {{estudiante.apellidoMaterno}}
+            </td>
+            <td class="col-1">
+                <div>
+                    <input type="text" class="form-control"  name="seccion" />
+                </div>
+            </td>
+            <td class="col-1">
+                <div>
+                    <input type="text" class="form-control"  name="seccion" />
+                </div>
+            </td>
+            <td class="col-1">
+                <div>
+                    <input type="text" class="form-control"  name="seccion" />
+                </div>
+            </td>
+            <td class="col-1">
+                <div>
+                    <input type="text" class="form-control"  name="seccion" />
+                </div>
+            </td>
+            <td class="col-1">
+                <div>
+                    <input type="text" class="form-control"  name="seccion" disabled/>
+                </div>
+            </td>
+            
+        </tr>
+
+           
+    </tbody>
+  </table>
+
+  <button class="btn btn-primary" >Guardar Notas</button>

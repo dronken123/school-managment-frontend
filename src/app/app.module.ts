@@ -37,6 +37,8 @@ export const routes: Routes = [
     { path: 'aulas/:idAula/clases', component: ClasesComponent},
     { path: 'aulas/:idAula/clases/horario', component: HorarioComponent},
     { path: 'aulas/:idAula/clases/:idClase', component: ClaseDetalleComponent},
+    { path: 'aulas/:idAula/clases/:idClase', component: ClaseDetalleComponent},
+    { path: 'aulas/:idAula/clases/:idClase/notas', component: NotasComponent},
     { path: 'aulas/:idAula/clases/:idClase/asistencias', component: AsistenciasComponent},
     { path: 'aulas', component: AulasComponent},
     { path: 'aulas/form', component: AulaFormComponent},
