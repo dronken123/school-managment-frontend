@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NuevoUsuario } from 'src/app/auth/models/nuevo-usuario';
 import { Empleado } from 'src/app/models/empleado';
+import { Especialidad } from 'src/app/models/especialidad';
 import { AuthService } from 'src/app/services/auth.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import Swal from 'sweetalert2';
@@ -14,9 +15,13 @@ import Swal from 'sweetalert2';
 export class EmpleadoFormComponent implements OnInit {
 
   empleado: Empleado = new Empleado();
+  especialidad: Especialidad = new Especialidad();
 
   errores: string[] = [];
   sexo: string[] = ['MASCULINO', 'FEMENINO'];
+  especialidades: Especialidad[] = [];
+  especialidadesDocente: Especialidad[] = [];
+  especialidadesAuxiliar: Especialidad[] = [];
 
   constructor(private empleadoService: EmpleadoService, private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService) { }
 
@@ -29,11 +34,28 @@ export class EmpleadoFormComponent implements OnInit {
         .subscribe(params => {
           let id:number = +params['id'];
 
+          
+          this.empleadoService.getEspecialidades()
+          .subscribe(response => this.especialidades = response);
+
           if(id){
             this.empleadoService.getEmpleado(id)
-                .subscribe(response => this.empleado = response);
+                .subscribe(response => {
+                  this.empleado = response;
+                  this.especialidadesDocente = this.empleado.especialidades;
+                  this.empleado.especialidades.forEach(e => {
+                    this.especialidades.forEach(es => {
+                      if(e.id == es.id){
+                        es.asignado = true;
+                        return
+                      }
+                    })
+                  })
+                });
           }
+
         })
+        
   }
 
   crear(){
@@ -41,6 +63,7 @@ export class EmpleadoFormComponent implements OnInit {
     nuevoUsuario.username = this.empleado.dni;
     nuevoUsuario.password = this.empleado.dni;
     nuevoUsuario.roles.push('ROLE_PROFESOR')
+    this.empleado.especialidades = this.especialidadesDocente;
 
     this.authService.nuevo(nuevoUsuario).subscribe(response => {
 
@@ -64,6 +87,7 @@ export class EmpleadoFormComponent implements OnInit {
   }
 
   actualizar(){
+    this.empleado.especialidades = this.especialidadesDocente;
     this.empleadoService.updateEmpleado(this.empleado)
         .subscribe(response => {
           this.router.navigate(['/dashboard/empleados']);
@@ -78,6 +102,33 @@ export class EmpleadoFormComponent implements OnInit {
           console.log(this.errores)
         }
         );
+  }
+
+  crearEspecialidad(): void {
+    this.empleadoService.saveEspecialidad(this.especialidad)
+        .subscribe(response => {
+          this.especialidades.push(response.especialidad);
+        });
+    
+  }
+
+  asignarEspecialidad(especialidad: Especialidad): void {
+
+    if(this.especialidadesDocente.length > 0){
+      let encontrado = false;
+      this.especialidadesDocente.forEach(e => {
+        if(e.id == especialidad.id){
+          this.especialidadesDocente = this.especialidadesDocente.filter(e => e.id != especialidad.id);
+          encontrado = true;
+          return
+        }
+      })
+      if(!encontrado){
+        this.especialidadesDocente.push(especialidad);
+      }
+    }else{
+      this.especialidadesDocente.push(especialidad);
+    }
   }
 
 }

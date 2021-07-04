@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Clase } from '../models/clase';
 import { Empleado } from '../models/empleado';
+import { Especialidad } from '../models/especialidad';
 
 @Injectable({
   providedIn: 'root'
@@ -76,4 +77,19 @@ export class EmpleadoService {
   deleteEmpleado(id: number): Observable<Empleado>{
     return this.http.delete<Empleado>(`${this.urlEndPoint}/${id}`);
   }
+
+  getEspecialidades(): Observable<Especialidad[]>{
+    return this.http.get<Especialidad[]>(`${this.urlEndPoint}/especialidades`);
+  }
+
+  saveEspecialidad(especialidad: Especialidad): Observable<any>{
+    return this.http.post<any>(`${this.urlEndPoint}/especialidades/crear`, especialidad)
+                    .pipe(
+                      map((response: any) => {
+                        response.content as Especialidad;
+                        return response;
+                      })
+                    );
+  }
+
 }

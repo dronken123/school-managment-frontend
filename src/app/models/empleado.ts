@@ -1,4 +1,4 @@
-import { Clase } from "./clase";
+import { Especialidad } from "./especialidad";
 
 export class Empleado {
     id: number;
@@ -11,4 +11,5 @@ export class Empleado {
     celular: string;
     sexo: string;
     correo: string;
+    especialidades: Especialidad[];
 }

@@ -73,10 +73,8 @@ export class AulaFormComponent implements OnInit {
 
     this.estudianteService.getEstudiantes()
         .subscribe((response: Estudiante[]) => {
-          
-          this.estudiantes = response.filter((e: Estudiante) => e.aulaEstudiante == null);
+          this.estudiantes = response.filter((e: Estudiante) => e.aulaEstudiante == null && e.grado.id == this.aula.gradoAula.id);
         });
-    
   }
 
   cargarAula(): void{
@@ -96,11 +94,10 @@ export class AulaFormComponent implements OnInit {
 
                   this.aulaService.getClasesAula(id.toString()).subscribe(response => {
                     this.clasesAula = response;
-                    console.log(this.clasesAula);
                   });
                   this.aulaService.getEstudiantesAula(id.toString()).subscribe(response => {
                     this.aulaEstudiantes = response;
-                    console.log(this.aulaEstudiantes)
+                    this.aula.cantidadEstudiante = response.length;
                   })
 
                 });
@@ -203,14 +200,19 @@ export class AulaFormComponent implements OnInit {
 
   agregarEstudiante(estudiante: Estudiante): void {
     
-    estudiante.aulaEstudiante = this.aula;
+    if(this.aula.cantidadEstudiante < this.aula.capacidad){
+      this.aula.cantidadEstudiante++;
+      estudiante.aulaEstudiante = this.aula;
     
-    
-    this.estudianteService.updateEstudiante(estudiante)
-                          .subscribe(response => {
-                            this.estudiantes = this.estudiantes.filter(e => e.id != estudiante.id);
-                            this.aulaEstudiantes.push(estudiante)
-                          });
+      this.estudianteService.updateEstudiante(estudiante)
+                            .subscribe(response => {
+                              this.estudiantes = this.estudiantes.filter(e => e.id != estudiante.id);
+                              this.aulaEstudiantes.push(estudiante);
+                            });
+    }else{
+      Swal.fire('Upss!',`Capacidad máxima: ${this.aula.capacidad} estudiantes.`,'warning')
+    }
+
   }
 
   quitarEstudiante(estudiante: Estudiante): void {
@@ -218,6 +220,7 @@ export class AulaFormComponent implements OnInit {
     this.aulaEstudiantes = this.aulaEstudiantes.filter(e => e.id != estudiante.id)
     estudiante.aulaEstudiante = null;
     this.estudianteService.updateEstudiante(estudiante).subscribe(response => {
+      this.aula.cantidadEstudiante--;
       this.estudiantes.push(estudiante);
     })
   }

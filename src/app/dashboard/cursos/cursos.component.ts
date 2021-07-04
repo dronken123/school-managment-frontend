@@ -25,7 +25,6 @@ export class CursosComponent implements OnInit {
   }
 
   cargarCurso(curso: Curso): void {
-    console.log(curso)
     this.cursoService.getCurso(curso.id)
         .subscribe(response => this.cursoActualizar = response);
   }

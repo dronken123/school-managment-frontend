@@ -72,12 +72,6 @@ export class HorarioComponent implements OnInit {
         }
       })
     })
-
-    console.log(this.frecuenciasLunes)
-    console.log(this.frecuenciasMartes)
-    console.log(this.frecuenciasMiercoles)
-    console.log(this.frecuenciasJueves)
-    console.log(this.frecuenciasViernes)
   }
 
 }

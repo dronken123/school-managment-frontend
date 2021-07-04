@@ -16,7 +16,6 @@ export class EmpleadosComponent implements OnInit {
   ngOnInit(): void {
     this.empleadoService.getEmpleados().subscribe((response) => {
       this.listaEmpleados = response;
-      console.log(this.listaEmpleados);
     });
   }
 

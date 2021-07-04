@@ -28,7 +28,6 @@ export class DashboardComponent implements OnInit {
     if(this.profesorActivo){
       this.cargarClasesProfesor();
     }
-     console.log(this.profesorActivo)
   }
   
   clear(): void {

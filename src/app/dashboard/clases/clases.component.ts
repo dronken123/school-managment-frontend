@@ -38,47 +38,7 @@ export class ClasesComponent implements OnInit {
           this.aulaService.getClasesAula(idAula)
         .subscribe(response => {
           this.clases = response;
-          this.cargarClasexDia();
         });
         })
   }
-
-  cargarClasexDia(): void {
-    this.clases.forEach(c => {
-      
-      // frecuenciasLunes = c.frecuencias.filter(f => {
-      //   if(f.dia.id == this.diasSemana[0].id){
-      //     return f;
-      //   }
-        
-      // })
-      c.frecuencias.forEach(f => {
-        if(f.dia.id === this.diasSemana[0].id){
-          this.frecuenciasLunes.push(f);
-        }
-        if(f.dia.id === this.diasSemana[1].id){
-          this.frecuenciasMartes.push(f);
-        }
-        if(f.dia.id === this.diasSemana[2].id){
-          this.frecuenciasMiercoles.push(f);
-        }
-        if(f.dia.id === this.diasSemana[3].id){
-          this.frecuenciasJueves.push(f);
-        }
-        if(f.dia.id === this.diasSemana[4].id){
-          this.frecuenciasViernes.push(f);
-        }
-      })
-    })
-
-    console.log(this.frecuenciasLunes)
-    console.log(this.frecuenciasMartes)
-    console.log(this.frecuenciasMiercoles)
-    console.log(this.frecuenciasJueves)
-    console.log(this.frecuenciasViernes)
-  }
-
-
-
-
 }
