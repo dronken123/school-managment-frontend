@@ -16,17 +16,16 @@
                     <label for="username" class="input-label fw-bold">DNI</label>
                     <input type="text" class="form-control" name="username" [(ngModel)]="loginUsuario.username">
                 </div>
-                <div class="px-4 mb-3">
+                <div class="px-4">
                     <label for="password" class="input-label fw-bold">Contraseña</label>
                     <input type="password" name="password" class="form-control" [(ngModel)]="loginUsuario.password">
                 </div>
 
-                <div class=" px-4 alert mb-3 text-danger fw-bold" role="alert" *ngIf="!isLogged">
+                <div class=" px-4 alert  text-danger" role="alert" *ngIf="!isLogged" >
                     {{errorMensaje}}
                   </div>
-                <div class="px-4 mb-3 d-grid">
+                <div class="px-4  d-grid">
                 <button class="btn btn-block" (click)="onLogin()">Iniciar sesión</button>
-                <button class="btn btn-block mt-2">Recuperar contraseña</button>
                 </div>
                 
             </form>

@@ -1,4 +1,5 @@
 import { Curso } from "./curso";
+import { Estudiante } from "./estudiante";
 
 export class Nota {
     id: number;
@@ -8,5 +9,6 @@ export class Nota {
     nota_bim4: number;
     promedioFinal: number;
     curso: Curso;
+    estudiante: Estudiante;
 
 }

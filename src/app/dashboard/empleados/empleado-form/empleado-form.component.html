@@ -12,15 +12,39 @@
         <div class="row">
             <div class="form-group col-sm-4">
                 <label for="nombres" class="input-label">Nombres</label>
-                <input type="text" class="form-control" name="nombres" [(ngModel)]="empleado.nombres">
+                <input type="text" class="form-control" name="nombres" [(ngModel)]="empleado.nombres" required minlength="2" maxlength="40" #nombres="ngModel">
+                <div class="text-danger" *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)">
+                    <div *ngIf="nombres.errors.required">
+                        Nombres es requerido.
+                    </div>
+                    <div *ngIf="nombres.errors.minlength || nombres.errors.maxlength">
+                        Nombres debe ser entre 2 y 40 caracteres.
+                    </div>
+                </div>
             </div>
             <div class="form-group col-sm-4">
                 <label for="apellidoPaterno" class="input-label">Apellido Paterno</label>
-                <input type="text" class="form-control" name="apellidoPaterno" [(ngModel)]="empleado.apellidoPaterno">
+                <input type="text" class="form-control" name="apellidoPaterno" [(ngModel)]="empleado.apellidoPaterno" required minlength="2" maxlength="20" #apellidoPaterno="ngModel">
+                <div class="text-danger" *ngIf="apellidoPaterno.invalid && (apellidoPaterno.dirty || apellidoPaterno.touched)">
+                    <div *ngIf="apellidoPaterno.errors.required">
+                        Apellido Paterno es requerido
+                    </div>
+                    <div *ngIf="apellidoPaterno.errors.minlength || apellidoPaterno.errors.maxlength">
+                        Apellido paterno debe ser entre 2 y 20 caracteres.
+                    </div>
+                </div>
             </div>
             <div class="form-group col-sm-4">
                 <label for="apellidoMaterno" class="input-label">Apellido Materno</label>
-                <input type="text" class="form-control" name="apellidoMaterno" [(ngModel)]="empleado.apellidoMaterno">
+                <input type="text" class="form-control" name="apellidoMaterno" [(ngModel)]="empleado.apellidoMaterno" required minlength="2" maxlength="20" #apellidoMaterno="ngModel">
+                <div class="text-danger" *ngIf="apellidoMaterno.invalid && (apellidoMaterno.dirty || apellidoMaterno.touched)">
+                    <div *ngIf="apellidoMaterno.errors.required">
+                        Apellido materno es requerido
+                    </div>
+                    <div *ngIf="apellidoMaterno.errors.minlength || apellidoMaterno.errors.maxlength">
+                        Apellido materno debe ser entre 2 y 20 caracteres.
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row mt-2">

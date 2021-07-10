@@ -5,6 +5,8 @@ import { Apoderado } from 'src/app/models/apoderado';
 import { Estudiante } from 'src/app/models/estudiante';
 import { Grado } from 'src/app/models/grado';
 import { Matricula } from 'src/app/models/matricula';
+import { Nivel } from 'src/app/models/nivel';
+import { Turno } from 'src/app/models/turno';
 import { AuthService } from 'src/app/services/auth.service';
 import { GradoService } from 'src/app/services/grado.service';
 import { MatriculaService } from 'src/app/services/matricula-service.service';
@@ -23,6 +25,8 @@ export class MatriculaFormComponent implements OnInit {
   matricula: Matricula = new Matricula();
   sexo: string[] = ['MASCULINO', 'FEMENINO'];
   grados: Grado[] = [];
+  niveles: Nivel[] = [];
+  turnos: Turno[] = [];
 
   constructor(private matriculaService: MatriculaService,
               private router: Router,
@@ -33,6 +37,8 @@ export class MatriculaFormComponent implements OnInit {
     this.estudiante.apoderado = this.apoderado;
     this.matricula.estudiante = this.estudiante;
     this.gradoService.getGrados().subscribe(response => this.grados = response);
+    this.matriculaService.getNiveles().subscribe(response => this.niveles = response);
+    this.matriculaService.getTurnos().subscribe(response => this.turnos = response);
   }
 
   crear(): void {

@@ -41,15 +41,38 @@
                     </div>
                 </div>
                 <div class="row mt-2">
-                    <div class="form-group col-sm-3">
+                    <div class="form-group col-sm-6">
                         <label for="correo" class="input-label">Correo</label>
                         <input type="text" class="form-control" name="correo" [(ngModel)]="estudiante.correo" disabled>
                     </div>
-                    <div class="form-group col-sm-3">
+                    <div class="form-group col-sm-6">
                         <label for="sexo" class="input-label">Sexo</label>
                         <input type="text" class="form-control" name="sexo" [(ngModel)]="estudiante.sexo">
                     </div>
 
+                    
+
+                    
+                </div>
+                <div class="row mt-2">
+                    <div class="form-group col-sm-3">
+                        <label for="nivel" class="input-label">Nivel</label>
+                                <div class="col-sm-12">
+                                    <select [compareWith]="compararNivel" [(ngModel)]="estudiante.nivel" class="form-control" name="nivel">
+                                        <option [ngValue]="undefined">--- Seleccionar nivel ---</option>
+                                        <option *ngFor="let nivel of niveles" [ngValue]="nivel">{{nivel.nombre}}</option>
+                                    </select>
+                                </div>
+                    </div>
+                    <div class="form-group col-sm-3">
+                        <label for="turno" class="input-label">Turno</label>
+                                <div class="col-sm-12">
+                                    <select [compareWith]="compararTurno" [(ngModel)]="estudiante.turno" class="form-control" name="turno">
+                                        <option [ngValue]="undefined">--- Seleccionar turno ---</option>
+                                        <option *ngFor="let turno of turnos" [ngValue]="turno">{{turno.nombre}}</option>
+                                    </select>
+                                </div>
+                    </div>
                     <div class="form-group col-sm-3">
                         <label for="grado" class="input-label">Grado</label>
                                 <div class="col-sm-12">
@@ -59,7 +82,6 @@
                                     </select>
                                 </div>
                     </div>
-                    
                     <div class="form-group col-sm-3">
                         <label for="aula" class="input-label">Aula</label>
                         <div>
@@ -69,59 +91,19 @@
                             </select>
                         </div>
                     </div>
-                    
-                </div>
+                    </div>
                 <div class="row mt-2">
                 <div class="form-group">
                     <label for="domicilio" class="input-label">Domicilio del estudiante</label>
                     <input type="text" class="form-control" name="domicilio" [(ngModel)]="estudiante.domicilio">
                 </div>
                 </div>
-                <!-- <div class="form-group row mb-2">
-                    <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" [(ngModel)]="estudiante.nombres" name="nombre">
-                    </div>
-                </div>
-                <div class="form-group row mb-2">
-                    <label for="apellidoP" class="col-form-label col-sm-2">Apellido Paterno</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" [(ngModel)]="estudiante.apellidoPaterno" name="apellidoP">
-                    </div>
-                </div>
-                <div class="form-group row mb-2">
-                    <label for="apellidoM" class="col-form-label col-sm-2">Apellido Materno</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" [(ngModel)]="estudiante.apellidoMaterno" name="apellidoM">
-                    </div>
-                </div>
-                <div class="form-group row mb-2">
-                    <label for="fechaNacimiento" class="col-form-label col-sm-2">Fecha de Nacimiento</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" [(ngModel)]="estudiante.fechaNacimiento" name="fechaNacimiento">
-                    </div>
-                </div>
-                <div class="form-group row mb-2">
-                    <label for="dni" class="col-form-label col-sm-2">DNI</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" [(ngModel)]="estudiante.dni" name="dni">
-                    </div>
-                </div>
-
-                <div class="form-group row mb-2">
-                    <label for="sexo" class="col-form-label col-sm-2">Sexo</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" [(ngModel)]="estudiante.sexo" name="sexo">
-                    </div>
-                </div> -->
-
-
 
                 <div class="form-group row">
                     <div class="col-sm-8">
                         <button *ngIf="!estudiante.id" class="btn" (click)="crear()">Crear</button>
                         <button *ngIf="estudiante.id" class="btn mt-3" style="background-color: #164e85; border-color: #164e85; color: #fff;"
-                           (click)="actualizar()">Actualizar</button>
+                           (click)="actualizar()" >Actualizar</button>
                     </div>
                 </div>
 

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Clase } from '../models/clase';
+import { Nota } from '../models/nota';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,10 @@ export class ClaseService {
     params = params.set('idClase', idClase);
     params = params.set('idMaterial', idMaterial);
     return this.http.delete<any>(`${this.urlEndPoint}/eliminarMaterial`, {params: params});
+  }
+
+  crearNota(nota: Nota): Observable<Nota>{
+    return this.http.post<Nota>(`${this.urlEndPoint}/crearNota`, nota);
   }
 
 }
