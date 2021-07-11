@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { EstudiantesComponent } from './dashboard/estudiantes/estudiantes.component';
@@ -40,6 +43,7 @@ export const routes: Routes = [
     { path: 'aulas/:idAula/clases/:idClase', component: ClaseDetalleComponent},
     { path: 'aulas/:idAula/clases/:idClase/notas', component: NotasComponent},
     { path: 'aulas/:idAula/clases/:idClase/asistencias', component: AsistenciasComponent},
+    { path: 'aulas/:idAula/asistencias', component: AsistenciasComponent},
     { path: 'aulas', component: AulasComponent},
     { path: 'aulas/form', component: AulaFormComponent},
     { path: 'aulas/form/:id', component: AulaFormComponent},
@@ -79,7 +83,10 @@ export const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    NgxChartsModule,
     FormsModule,
     RouterModule.forRoot(routes)
   ],

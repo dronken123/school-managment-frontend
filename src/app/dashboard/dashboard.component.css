@@ -117,15 +117,15 @@
 }
 
 .charts {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
   padding: 20px 37px;
-  height: 400px;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(40rem, 1fr));
+  
  }
 
  .line-chart {
    border-radius: 12px;
-  width: 65%;
   background-color: #fff;
   padding: 15px 14px;
   box-shadow:  0 5px 10px rgba(0, 0, 0, 0.1);
@@ -139,24 +139,21 @@
 
  .pie-chart {
   box-shadow:  0 5px 10px rgba(0, 0, 0, 0.1);
-   margin-left: 20px;
-   width: 35%;
   border-radius: 12px;
   background-color: #fff;
   padding: 15px 14px;
+  
  }
 
  .chart-data {
   text-align: center;
+  display: flex;
+  justify-content: center;
  }
 
  @media (max-width: 1220px) {
   .card-item {
     width: calc(100% / 2 - 35px);
-  }
-
-  .charts {
-    flex-wrap: wrap;
   }
 
   .pie-chart{

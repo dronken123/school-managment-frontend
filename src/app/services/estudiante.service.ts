@@ -54,6 +54,22 @@ export class EstudianteService {
                );
   }
 
+  actualizarAsistencia(estudiantes: Estudiante[]): Observable<Estudiante[]>{
+    return this.http.put<Estudiante[]>(this.urlEndPoint+'/actualizarEstudiantes', estudiantes)
+               .pipe(
+                 catchError(e => {
+                   if(e.status == 400){
+                    return throwError(e);
+                   }
+
+                   console.log(e.error.mensaje)
+                   console.error(e.error.errors)
+
+                   return throwError(e);
+                 })
+               );
+  }
+
   getEstudiante(id: number): Observable<Estudiante>{
     return this.http.get<Estudiante>(`${this.urlEndPoint}/${id}`);
   }

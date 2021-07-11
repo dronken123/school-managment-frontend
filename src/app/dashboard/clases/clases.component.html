@@ -1,8 +1,11 @@
 <div class="card mt-2">
   
   <div class="card-body">
-    <h5>Clases registradas </h5>
-    <button class="btn btn-primary btn-sm">Crear clase</button>
+    <div class="d-flex justify-content-between">
+      <h5>Clases registradas </h5>
+      <button [routerLink]="[ '/dashboard/aulas',idAula,'asistencias' ]" class="btn btn-outline-primary btn-sm">Marcar Asistencia</button>
+    </div>
+    
   <hr>
     <div class="row row-cols-1 row-cols-md-3">
       <div class="alert alert-info mb-0" role="alert" *ngIf="clases.length == 0">

@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { Clase } from '../models/clase';
+import { Curso } from '../models/curso';
 import { Empleado } from '../models/empleado';
+import { Grado } from '../models/grado';
+import { CursoService } from '../services/curso.service';
 import { EmpleadoService } from '../services/empleado.service';
+import { GradoService } from '../services/grado.service';
 import { TokenService } from '../services/token.service';
 
 @Component({
@@ -18,11 +23,24 @@ export class DashboardComponent implements OnInit {
   empleado: Empleado = new Empleado();
   clases: Clase[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private tokenService: TokenService, private empleadoService: EmpleadoService) { }
+
+  eventsSubject: Subject<any> = new Subject<any>();
+  cursos: Curso[] = [];
+  grados: Grado[] = [];
+  cursoId: number;
+  gradoId: number;
+
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private tokenService: TokenService,
+              private empleadoService: EmpleadoService,
+              private curoService: CursoService,
+              private gradoService: GradoService) { }
 
   ngOnInit(): void {
 
-
+    this.curoService.getCursos().subscribe(response => this.cursos = response);
+    this.gradoService.getGrados().subscribe(response => this.grados = response);
     this.tokenService.isProfesor() ? this.profesorActivo = true : this.profesorActivo = false;
     this.tokenService.isAdmin() ? this.adminActivo = true : this.adminActivo = false;
     if(this.profesorActivo){
@@ -49,6 +67,10 @@ export class DashboardComponent implements OnInit {
             this.clases = response;
           });
     });
+  }
+
+  loadDataChart(): void {
+    this.eventsSubject.next([this.cursoId, this.gradoId]);
   }
   
 

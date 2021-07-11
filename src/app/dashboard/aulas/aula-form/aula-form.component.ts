@@ -71,10 +71,7 @@ export class AulaFormComponent implements OnInit {
 
     this.matriculaService.getDias().subscribe(response => this.dias = response);
 
-    this.estudianteService.getEstudiantes()
-        .subscribe((response: Estudiante[]) => {
-          this.estudiantes = response.filter((e: Estudiante) => e.aulaEstudiante == null && e.grado.id == this.aula.gradoAula.id);
-        });
+
   }
 
   cargarAula(): void{
@@ -83,10 +80,11 @@ export class AulaFormComponent implements OnInit {
           let id = +params['id'];
 
           if(id){
+ 
             this.aulaService.getAula(id)
                 .subscribe(response =>{
                   this.aula = response; 
-
+                  console.log(this.aula)
                   if(this.frecuencias.length == 0){
                     let frecuencia: Frecuencia = new Frecuencia();
                     this.frecuencias.push(frecuencia);
@@ -99,7 +97,11 @@ export class AulaFormComponent implements OnInit {
                     this.aulaEstudiantes = response;
                     this.aula.cantidadEstudiante = response.length;
                   })
-
+                  this.estudianteService.getEstudiantes()
+                  .subscribe((response: Estudiante[]) => {
+      
+                    this.estudiantes = response.filter((e: Estudiante) => e.aulaEstudiante == null && e.grado.id == this.aula.gradoAula.id);
+                  });
                 });
           }
 

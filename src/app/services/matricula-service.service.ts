@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DiaSemana } from '../models/dia-semana';
 import { Matricula } from '../models/matricula';
 import { Nivel } from '../models/nivel';
+import { Nota } from '../models/nota';
 import { Turno } from '../models/turno';
 
 @Injectable({
@@ -29,6 +30,17 @@ export class MatriculaService {
 
   getDias(): Observable<DiaSemana[]>{
     return this.http.get<DiaSemana[]>(this.urlEndPoint+'/dias');
+  }
+
+  getNotas(idCurso: string, idAula: string): Observable<Nota[]>{
+    let params = new HttpParams();
+    params = params.set('idCurso', idCurso);
+    params = params.set('idAula', idAula);
+    return this.http.get<Nota[]>(this.urlEndPoint+'/notas', {params: params});
+  }
+
+  actualizarNotas(notas: Nota[]): Observable<Nota[]>{
+    return this.http.put<Nota[]>(this.urlEndPoint+"/notas", notas);
   }
 
 }

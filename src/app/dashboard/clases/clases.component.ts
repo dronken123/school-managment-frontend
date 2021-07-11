@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
 import { Clase } from 'src/app/models/clase';
 import { DiaSemana } from 'src/app/models/dia-semana';
 import { Frecuencia } from 'src/app/models/frecuencia';
@@ -15,12 +16,7 @@ export class ClasesComponent implements OnInit {
 
   clases: Clase[] = [];
   diasSemana: DiaSemana[] = [];
-
-  frecuenciasLunes: Frecuencia[] = [];
-  frecuenciasMartes: Frecuencia[] = [];
-  frecuenciasMiercoles: Frecuencia[] = [];
-  frecuenciasJueves: Frecuencia[] = [];
-  frecuenciasViernes: Frecuencia[] = [];
+  idAula: string;
 
   constructor(private aulaService: AulaService,
               private activatedRoute: ActivatedRoute,
@@ -34,11 +30,14 @@ export class ClasesComponent implements OnInit {
   cargarClases(): void {
     this.activatedRoute.params
         .subscribe(params => {
-          let idAula: string = params['idAula'];
-          this.aulaService.getClasesAula(idAula)
+          this.idAula = params['idAula'];
+          this.aulaService.getClasesAula(this.idAula)
         .subscribe(response => {
           this.clases = response;
         });
         })
   }
+
+
+
 }

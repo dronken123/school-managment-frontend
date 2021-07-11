@@ -7,7 +7,7 @@ export class Nota {
     nota_bim2: number;
     nota_bim3: number;
     nota_bim4: number;
-    promedioFinal: number;
+    promedio_final: number;
     curso: Curso;
     estudiante: Estudiante;
 
