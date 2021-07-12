@@ -3,40 +3,45 @@
   <a class="btn btn-light" (click)="regresar()">&laquo; regresar</a>
 </h4>
 <hr>
-
-<form [formGroup]="form" (ngSubmit)="enviar(form.value)">
-    <div formArrayName="lessons" class="col-12">
-        <div *ngFor="let lessonForm of lessons.controls">
-            <div [formGroup]="lessonForm" class="d-flex col-12">
-
-                <div class="col-1">
-                    <input type="text" formControlName="bimestre1"  class="form-control" placeholder="Escribe algo aquí">
+<div class="d-flex">
+    <form [formGroup]="form" (ngSubmit)="enviar(form.value)">
+        <div formArrayName="lessons" class="">
+            
+            <div *ngFor="let lessonForm of lessons.controls">
+                <div [formGroup]="lessonForm" class="d-flex col-12">
+                    <div class="col-4">
+                        <input type="text" formControlName="nombreEstudiante"  class="form-control" placeholder="Escribe algo aquí">
+                    </div>
+                    <div class="col-1">
+                        <input type="text" formControlName="bimestre1"  class="form-control" placeholder="Escribe algo aquí">
+                    </div>
+                    <div class="col-1">
+                        <input type="text" formControlName="bimestre2" class="form-control" placeholder="Escribe algo aquí">
+                    </div>
+                    <div class="col-1">
+                        <input type="text" formControlName="bimestre3" class="form-control" placeholder="Escribe algo aquí">
+                    </div>
+                    
+                    <div class="col-1">
+                        <input type="text" formControlName="bimestre4" class="form-control" placeholder="Escribe algo aquí">
+                    </div>
+                    <div class="col-1">
+                        <input type="text" formControlName="promedioFinal" class="form-control" placeholder="Escribe algo aquí">
+                    </div>
+                    
                 </div>
-                <div class="col-1">
-                    <input type="text" formControlName="bimestre2" class="form-control" placeholder="Escribe algo aquí">
-                </div>
-                <div class="col-1">
-                    <input type="text" formControlName="bimestre3" class="form-control" placeholder="Escribe algo aquí">
-                </div>
-                
-                <div class="col-1">
-                    <input type="text" formControlName="bimestre4" class="form-control" placeholder="Escribe algo aquí">
-                </div>
-                <div class="col-1">
-                    <input type="text" formControlName="promedioFinal" class="form-control" placeholder="Escribe algo aquí">
-                </div>
-                
             </div>
         </div>
-    </div>
-    <div >
-    </div>
+        <div >
+        </div>
+        
     
+    <button class="btn btn-primary" type="submit">Guardar notas</button>
+    </form>
+</div>
 
-<button class="btn btn-success" type="submit">Add</button>
-</form>
-<!-- 
-<table class="table table-bordered">
+
+<!-- <table class="table table-bordered">
     <thead>
         <tr>
             <th>NOMBRES Y APELLIDOS</th>
@@ -54,6 +59,7 @@
             </td>
 
             <td>
+                
             </td>
             
         </tr>

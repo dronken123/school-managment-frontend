@@ -43,8 +43,8 @@ export class LineChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.events.subscribe(grados => {
-      this.getDatosChart(grados[0], grados[1]);
+    this.events.subscribe(ids => {
+      this.getDatosChart(ids[0], ids[1]);
     })
   }
 

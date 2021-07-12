@@ -7,10 +7,11 @@
     </div>
     
   <hr>
+  <div class="alert alert-info mb-0 " role="alert" *ngIf="clases.length == 0">
+    No hay CLASES registradas. Registre CLASES.
+  </div>
     <div class="row row-cols-1 row-cols-md-3">
-      <div class="alert alert-info mb-0" role="alert" *ngIf="clases.length == 0">
-        No hay CLASES registradas. Registre CLASES.
-      </div>
+      
       <div class="col" *ngFor="let clase of clases">
         <div>
           <ul class="list-group list-group-flush">

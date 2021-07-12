@@ -1,8 +1,10 @@
-<!-- <div>
-    <img src="../../../../assets/piechart.svg" alt="" style="width: 250px; height: 250px;">
-</div> -->
+<div *ngIf="single == undefined">
+  <div class="alert alert-info" role="alert">
+    Selecciona una fecha para poder mostrar estadísticas.
+  </div>
+</div>
 
-<ngx-charts-pie-chart
+<ngx-charts-pie-chart *ngIf="single?.length > 0"
   [view]="view"
   [scheme]="colorScheme"
   [results]="single"

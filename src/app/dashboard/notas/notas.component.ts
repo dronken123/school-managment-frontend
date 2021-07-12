@@ -8,6 +8,7 @@ import { AulaService } from 'src/app/services/aula.service';
 import { ClaseService } from 'src/app/services/clase.service';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 import { MatriculaService } from 'src/app/services/matricula-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-notas',
@@ -86,15 +87,8 @@ export class NotasComponent implements OnInit {
                           })  
                         }
 
-
-                        
-                        
-
-
                       });
-
-
-                  
+  
                 })
 
 
@@ -121,7 +115,11 @@ export class NotasComponent implements OnInit {
       this.notas.push(notaActualizar);
     })
     
-    this.matriculaService.actualizarNotas(this.notas).subscribe(response => console.log(response))
+    this.matriculaService.actualizarNotas(this.notas)
+        .subscribe(response => {
+          Swal.fire('Notas guardadas', 'Las notas se guardaron con éxito.','success');
+          this.router.navigate([`dashboard/aulas/${this.idAula}/clases`]);
+        })
   }
 
   regresar(): void {
@@ -139,9 +137,10 @@ export class NotasComponent implements OnInit {
         bimestre2: [nota.nota_bim2],
         bimestre3: [nota.nota_bim3],
         bimestre4: [nota.nota_bim4],
-        promedioFinal: [nota.promedio_final],
+        promedioFinal: [{value: nota.promedio_final, disabled: true}],
         estudiante: [nota.estudiante],
-        curso: [nota.curso]
+        curso: [nota.curso],
+        nombreEstudiante: [{value:nota.estudiante.nombres+' '+nota.estudiante.apellidoPaterno, disabled: true}]
       });
 
     this.lessons.push(lessonForm);

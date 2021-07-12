@@ -1,7 +1,9 @@
-import { Component, OnInit, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { single } from '../../../data';
+import { DatePipe } from '@angular/common';
+import { Component, OnInit, NgModule, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Asistencia } from 'src/app/models/asistencia';
+import { Estudiante } from 'src/app/models/estudiante';
+import { EstudianteService } from 'src/app/services/estudiante.service';
 
 @Component({
   selector: 'app-pie-chart',
@@ -9,6 +11,9 @@ import { single } from '../../../data';
   styleUrls: ['./pie-chart.component.css']
 })
 export class PieChartComponent implements OnInit {
+
+  @Input() events: Observable<any>;
+  multiData: any[] = [];
 
   single: any[];
   view: any[] = [700, 400];
@@ -24,12 +29,57 @@ export class PieChartComponent implements OnInit {
     domain: ['#2cd280', '#dc3545', '#ffc107']
   };
 
-  constructor() { }
-
+  constructor(private estudianteService: EstudianteService, private datePipe: DatePipe) { }
+  
   ngOnInit(): void {
-    Object.assign(this, { single });
-  }
+    
 
+    this.events.subscribe(fecha => {
+      this.multiData = [];
+      this.single = [];
+      
+      this.estudianteService.getEstudiantes()
+          .subscribe((estudiantes: Estudiante[]) => {
+            let asistenciaCounter: number = 0;
+            let tardanzaCounter: number = 0;
+            let faltaCounter: number = 0;
+            estudiantes.forEach(e => {
+              
+              let asistencia: Asistencia = e.asistencias.find(a => this.datePipe.transform(a.fecha,'MM/dd/yyyy') == fecha);
+              if(asistencia.estado == 'PUNTUAL'){
+                asistenciaCounter++;
+              }
+              if(asistencia.estado == 'TARDANZA'){
+                tardanzaCounter++;
+              }
+
+              if(asistencia.estado == 'FALTA'){
+                faltaCounter++;
+              }
+
+              
+            });
+
+
+            this.multiData.push(    {
+              "name": "PUNTUAL",
+              "value": asistenciaCounter
+            },
+            {
+              "name": "INASISTENCIA",
+              "value": faltaCounter
+            },
+            {
+            "name": "TARDANZA",
+              "value": tardanzaCounter
+            });
+            console.log(this.multiData)
+            this.single = [...this.multiData]
+          })
+
+    })
+    
+  }
   
   onSelect(data): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));

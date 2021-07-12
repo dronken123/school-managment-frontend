@@ -75,7 +75,7 @@
             <div class="card-item estudiante">
               <div class="card-left">
                 <div class="title">Estudiantes</div>
-                <div class="info">250</div>
+                <div class="info">{{cantidadEstudiantes}}</div>
               </div>
               <div class="card-right">
                 <i class="fas fa-child fa-3x"></i>
@@ -84,7 +84,7 @@
             <div class="card-item profesor">
               <div class="card-left">
                 <div class="title">Profesores</div>
-                <div class="info">20</div>
+                <div class="info">{{cantidadProfesores}}</div>
               </div>
               <div class="card-right">
                 <i class="fas fa-chalkboard-teacher fa-3x"></i>
@@ -93,7 +93,7 @@
             <div class="card-item aula">
               <div class="card-left">
                 <div class="title">Aulas</div>
-                <div class="info">25</div>
+                <div class="info">{{cantidadAulas}}</div>
               </div>
               <div class="card-right">
                 <i class="fas fa-school fa-3x"></i>
@@ -114,28 +114,6 @@
 
 
             <div class="line-chart">
-              <!-- <div class="chart-title d-flex justify-content-between">
-                <span class="col-3">Gráfica de aulas</span>
-                <div class="d-flex justify-content-evenly col-8 col-sm-6">
-                  <div class="col-4">
-                    <select  [(ngModel)]="cursoId" class="form-control" name="cursoId">
-                        <option [ngValue]="undefined">- Elija Curso -</option>
-                        <option *ngFor="let curso of cursos" [ngValue]="curso.id">{{curso.nombre}}</option>
-                    </select>
-                </div>
-                <div class="col-4">
-                  <select  [(ngModel)]="gradoId" class="form-control" name="gradoId">
-                      <option [ngValue]="undefined">Todos los grados</option>
-                      <option *ngFor="let grado of grados" [ngValue]="grado.id">{{grado.nombre}}</option>
-                  </select>
-              </div>
-              <button (click)="loadDataChart()" class="btn btn-outline-success"><i class="fas fa-search"></i></button>
-              
-              <div class="chart-data">
-                <app-line-chart [events]="eventsSubject.asObservable()"></app-line-chart>
-              </div>
-              
-              </div> -->
               <div class="chart-title d-flex justify-content-between">
                 <span class="col-4">Gráfica de aulas</span>
                 <div class="d-flex justify-content-evenly col-xl-6 col-xxl-7 col-sm-8">
@@ -152,35 +130,40 @@
                         <option *ngFor="let grado of grados" [ngValue]="grado.id">{{grado.nombre}}</option>
                     </select>
                   </div>
-                  <button (click)="loadDataChart()" class="btn btn-outline-success"><i class="fas fa-search"></i></button>
-                  <button (click)="loadDataChart()" class="btn btn-primary"><i class="fas fa-file-download"></i></button>
+                  <button (click)="loadDataBarchart()" class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
+                  <button (click)="loadDataBarchart()" class="btn btn-primary"><i class="fas fa-file-download"></i></button>
                 </div>
               </div>
               <hr>
               <div class="chart-data">
-                <app-line-chart [events]="eventsSubject.asObservable()"></app-line-chart>
+                <app-line-chart [events]="eventsSubjectBar.asObservable()"></app-line-chart>
               </div>
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="pie-chart">
-              <div class="chart-title">
+              <div class="chart-title d-flex justify-content-between">
                 <span>Gráfica de asistencias</span>
+                <div class="col-md-4">
+                  <div class="input-group">
+                      <div class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                      </div>
+                    <input type="text"
+                       name="datePicked"
+                       placeholder="Elegir fecha"
+                       class="form-control"
+                       bsDatepicker
+                       [maxDate]="maxDate"
+                       [bsConfig]="bsConfig"
+                       [(ngModel)]="datePicked">
+                       
+                       <button (click)="loadDataPiechart()" class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
+                  </div>
+                </div>
               </div>
               <hr>
               <div class="chart-data">
-                <app-pie-chart ></app-pie-chart>
+                <app-pie-chart [events]="eventsSubjectPie.asObservable()"></app-pie-chart>
               </div>
             </div>
           </div>

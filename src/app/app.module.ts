@@ -30,6 +30,15 @@ import { AsistenciasComponent } from './dashboard/clases/asistencias/asistencias
 import { HorarioComponent } from './dashboard/horario/horario.component';
 import { NotasComponent } from './dashboard/notas/notas.component';
 
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { esLocale } from 'ngx-bootstrap/locale';
+defineLocale('es', esLocale);
+
+
+
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { DatePipe } from '@angular/common';
+
 export const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, children: [
@@ -88,9 +97,10 @@ export const routes: Routes = [
     ReactiveFormsModule,
     NgxChartsModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BsDatepickerModule.forRoot()
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

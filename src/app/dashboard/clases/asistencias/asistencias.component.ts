@@ -76,12 +76,16 @@ export class AsistenciasComponent implements OnInit {
             showConfirmButton: false,
             timer: 1000
           })
-          this.router.navigate([`dashboard/aulas/${this.idAula}/clases/${this.idClase}`]);
           
+          if(this.idClase === undefined){
+            this.router.navigate([`dashboard/aulas/${this.idAula}/clases`]);
+          }else{
+            this.router.navigate([`dashboard/aulas/${this.idAula}/clases/${this.idClase}`]);
+          }
           console.log(this.estudiantes);
         });
   
-    
+
   }
 
   asistencia(estudiante: Estudiante, estado: string){
